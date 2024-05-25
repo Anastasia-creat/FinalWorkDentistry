@@ -1,0 +1,248 @@
+﻿@using FinalWorkDentistry.Models;
+@using FinalWorkDentistry.Domains;
+@using FinalWorkDentistry.BlazorComponents;
+@* @using Syncfusion.Blazor.Navigations *@
+@using System.Threading;
+
+<head>
+    <script src="https://unpkg.com/imask"></script>
+</head>
+
+
+<div class="wrappermain" style="min-width:100%; margin:0 auto; margin-bottom: 200px;">
+
+    <style>
+
+        .container-with-Zub {
+            display: flex;
+            margin-top: 120px; /* Измените значение на нужный вам отступ */
+            margin-bottom: 120px;
+        }
+
+        .left-content {
+            flex: 2;
+        }
+
+        .right-content {
+            flex: 1;
+            text-align: right; /* Помещает изображение вправо */
+        }
+
+
+
+
+
+
+        /* .card-container {
+            display: flex;
+            justify-content: center; 
+        }
+
+        .card {
+            color: #3f555a;
+            display: flex;
+            align-items: center;
+            background-image: url('/images/анестезия.png');
+            background-size: cover;
+        }
+
+        .card-body {
+            flex-grow: 1; 
+        }
+
+        .card-text {
+            text-align: left; 
+            margin: 0; 
+        } */
+
+
+
+        .card-container {
+            display: flex;
+            font-size: 22px;
+            margin-bottom: 200px;
+            flex-wrap: wrap;
+            justify-content: space-between
+        }
+
+        .card {
+            display: flex;
+            margin-right: 10px; 
+         
+            border-radius: 35px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+            overflow: hidden;
+           
+         
+            background-size: cover;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+            color: black;
+        
+        }
+
+        h2 {
+            margin: 0; /* Убираем внешние отступы у заголовка */
+        }
+
+        .card-content {
+            flex-grow: 1; /* Растягиваем контент на всю доступную ширину */
+            padding: 20px; /* Отступы внутри карточки */
+            word-wrap: break-word;
+          
+            
+        }
+
+        .card{
+            color: black;
+            display: flex;
+            align-items: flex-start;
+        }
+
+            .card-logo {
+
+               
+
+                text-align: center;
+                margin-top: 5px;
+                margin-bottom: 0;
+            }
+
+            .card-body{
+            word-wrap: break-word;
+            margin-top: 0;
+            }
+
+            .card-text{
+            width: 300px;
+            }
+
+        .image {
+            width: 200px; /* Ширина изображения */
+            height: 200px; /* Высота изображения */
+            background-size: cover; /* Растягиваем изображение на всю доступную площадь */
+            background-position: center; /* Центрируем изображение */
+        }
+
+       
+
+    </style>
+
+
+
+    
+<Carousel DataSource="items"
+          HideArrows HideIndicators SlideShow AutoPlay Loop Interval="2500"
+          style="width:100%; height:500px; margin: 0 auto; margin-bottom:20px; margin-top: 25px">
+</Carousel>
+
+
+     <div class="container-with-Zub">
+         <div class="left-content">
+             <!-- Текст слева -->
+             <h2 style="font-size: 34px">О клинике</h2>
+             <p style="font-size: 20px">
+                 Клиника образована в 1995 г. С этого времени она является одной из самых уникальных и технологичных клиник в нашей стране. Мы имеем 23 летний опыт разработки и внедрения принципиально новых методов лазерной диагностики, лечения и профилактики заболеваний полости рта.
+
+                 Наши стоматологи признаны профессионалами нашей и зарубежных стран. Наши врачи высшей категории, имеющие научные степени.
+
+                 Глав. врач нашей клиники Рисованная Ольга Николаевна — доктор медицинских наук, профессор кафедры стоматологии факультета повышения квалификации и профессиональной переподготовки специалистов Кубанского государственного медицинского университета, индивидуальный член Международной ассоциации лазерной стоматологии.
+             </p>
+         </div>
+         <div class="right-content">
+             <!-- Изображение справа -->
+            <img src="/images/ZubDesc.png" width="265" />
+         </div>
+     </div>
+
+
+ 
+
+     
+    <div class="card-container" style="font-weight: bold;">
+        <h2 style="text-align: center; font-size: 40px; padding-bottom:50px; width: 100%;">Популярные услуги</h2>
+
+        <div class="card" style=" background-image: url('/images/анестезия.png'); background-size: cover;">
+            <div style="flex-grow: 1;">
+                <p class="card-logo">Анестезия</p>
+                <div class="card-body">
+                    <p class="card-text">Безопасная и комфортная процедура</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="background-image: url('/images/пульпит.png'); background-size: cover; ">
+            <div style="flex-grow: 1;">
+                <p class="card-logo">Лечение пульпита</p>
+                <div class="card-body" >
+                    <p class="card-text">Избавление от воспаления пульпы зуба</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="background-image: url('/images/чистка.png'); background-size: cover;">
+            <div style="flex-grow: 1;">
+                <p class="card-logo">Ультразвуковая чистка</p>
+                <div class="card-body">
+                    <p class="card-text">Удаление зубного налета и зубного камня с помощью ультразвукового аппарата</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="background-image: url('/images/удаление.png'); background-size: cover; ">
+            <div style="flex-grow: 1;">
+                <p class="card-logo">Удаление</p>
+                <div class="card-body">
+                    <p class="card-text">Удаление зуба из полости рта</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card" style="background-image: url('/images/томография.png'); background-size: cover">
+            <div style="flex-grow: 1;">
+                <p class="card-logo">Компьютерная томография</p>
+                <div class="card-body">
+                    <p class="card-text">Снимки внутренних структур челюстно-лицевой области</p>
+                </div>
+            </div>
+        </div> 
+
+        <div class="card" style="background-image: url('/images/пломба.png'); background-size: cover;">
+            <div style="flex-grow: 1;">
+                <p class="card-logo">Пломба</p>
+                <div class="card-body"
+                    <p class="card-text" >Восстановление поврежденного зуба путем заполнения полости пломбировочным материалом</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+  
+
+ <BlazorMessageComponent
+    ParentComponent="this"/>  
+
+
+</div>
+
+
+
+
+@code {
+    dynamic[] items = new dynamic[]{
+   
+      new {label="", content="",
+      image="/images/deti.png"},
+      new {label="", content="",
+      image="/images/last.png"},
+   
+        new {label="", content="",
+      image="/images/1s.png"},
+    
+      new {label="", content="",
+      image="/images/womantext.png"},
+    
+  
+     
+  };
+}

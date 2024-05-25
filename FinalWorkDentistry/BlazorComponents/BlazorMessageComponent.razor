@@ -1,0 +1,381 @@
+﻿@page "/"
+
+@using Microsoft.AspNetCore.SignalR
+@using FinalWorkDentistry.Models;
+@using Microsoft.AspNetCore.SignalR.Client
+@inject NavigationManager NavigationManager
+@implements IAsyncDisposable
+
+
+
+          <style>
+    /* Стили для чата */
+
+    /* Стили для чата */
+    /* Стили для кнопки чата */
+    .chat-button {
+        position: fixed;
+        bottom: 20px; /* Расположение кнопки снизу */
+        right: 20px; /* Расположение кнопки справа */
+        z-index: 9999; /* Чтобы кнопка была поверх всех других элементов */
+       /*  background-color: #007bff; */ /* Цвет фона кнопки */
+
+        background-color: #9ACEEB;
+        color: white; /* Цвет текста кнопки */
+        border: none;
+        border-radius: 50%; /* Для круглой формы кнопки */
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    }
+    
+    .chat-header {
+        background-color: #007bff; /* Синий цвет фона */
+        color: white; /* Белый цвет текста */
+        padding: 10px;
+        font-weight: bold;
+    }
+
+        .chat-header h3 {
+            margin: 0;
+        }
+
+        .chat-header p {
+            margin: 5px 0;
+        }
+
+   
+
+     .chat-message-input {
+        background-color: #ffffff; 
+        border: 1px solid #cccccc; 
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+
+   
+
+        .chat-message-input input[type="text"] {
+            width: calc(100% - 20px); 
+            border: none;
+            outline: none; 
+        } 
+
+            .chat-message-input input[type="text"]::placeholder {
+                color: #cccccc; 
+            }
+    
+
+            .main{
+     
+        position: fixed;
+        bottom: 20px; /* Указываете желаемый отступ от нижнего края страницы */
+         left: 1100px; /* Можете также указать отступ от правого края страницы */
+        /* Дополнительные стили */
+        width: 350px; /* Ширина контейнера чата */
+        height: 700px; /* Высота контейнера чата */
+        background-color: #f0f0f0; /* Цвет фона контейнера */
+       
+        border-radius: 12px; /* Закругление углов */
+      
+   
+            }
+
+    
+
+          </style>
+
+
+
+@if (DisplayChat)
+{
+    <div class="main d-flex fixed-bottom" style="overflow-y: auto; overflow-x: hidden;">
+        <div class="wrapper shadow-sm rounded" style="width:350px">
+            <!-- Шапка чата -->
+            <div class="chat-header" style="background-color: #B0C4DE; color: #fff; padding: 10px;">
+                <button type="button" style="position: absolute; top: 5px; right: 5px; background: none; border: none; color: white; font-size: 18px; cursor: pointer;"
+                        
+                
+                @onclick="() => { CloseChat(); ClearChat(); }">
+                    &times;
+                </button>
+                <h5>Чат на сайте</h5>
+                <p>Онлайн</p>
+             
+            </div>
+          
+            <!-- Место для сообщений -->
+            <div class="chat-messages">
+                @foreach (var userMessage in userMessages)
+                {
+
+                    <div class="row @(userMessage.CurrentUser ? "justify-content-end" : "")">
+                        <div class="col">
+                            <div class="shadow p-3 mb-3 bg-light rounded @(userMessage.CurrentUser ? "text-end" : "")" style="display: inline-block; max-width: 70%; 
+                                        word-wrap: break-word; color: black; margin: 10px 5px 0 0 ">
+                                <p class="card-text" style="margin: 10px 0; font-size: 16px; text-align: left;">@userMessage.Message</p>
+                                <span class="small text-muted" style="display: block;">@userMessage.DateSent.ToString("HH:mm |  dd MMM")</span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+
+            <!-- Поле для ввода сообщения -->
+          @* <div class="chat-input" style="padding: 10px;">
+                <input @bind="usernameInput" type="text"  readonly="@isUserReadonly" style="margin-bottom: 10px;" /> 
+                <input/>
+               @*  <button type="button" @onclick="Send" disabled="@(!IsConnected)">Отправить</button>               </div>  *@
+
+            <div class="chat-message-input" style="position: absolute; bottom: 10px; left: 10px; right: 10px;">
+                <input @bind="messageInput" type="text" placeholder="Введите текст" style="width: calc(100% - 40px); border: none; outline: none; background-color: rgba(255, 255, 255, 0.8); padding: 10px;">
+                @* <input @bind="usernameInput" placeholder="имя" type="text" readonly="@isUserReadonly" style="margin-bottom: 10px;" /> *@
+                <button type="button" @onclick="Send" style="background-color: transparent; border: none; cursor: pointer; padding: 10px;">
+                    &#10149;
+                </button>
+
+            </div>
+         </div>
+    </div>
+}
+
+<button class="chat-button" style="float:right;" type="button" @onclick="OpenChat">
+    <span class="material-symbols-outlined">
+        forum
+    </span>
+</button>
+
+
+
+
+
+@code {
+
+    // public string Chat = "none;";
+
+    //public string ModalClass = "";
+
+    public bool DisplayChat {get; set;} = false;
+
+    private void ClearChat()
+    {
+        userMessages.Clear();
+        messageInput = string.Empty;
+    }
+
+    public void OpenChat(){
+        DisplayChat = true;
+        StateHasChanged();
+    }
+
+    public void CloseChat()
+    {
+        DisplayChat = false;
+        StateHasChanged();
+    }
+
+     [Parameter]
+     public AppleMainComponent ParentComponent { get; set; }
+    private HubConnection hubConnection;
+    private List<UserMessage> userMessages = new();
+    private string usernameInput;
+    private string messageInput;
+    private bool isUserReadonly = false;
+
+    public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"))
+            .Build();
+
+        hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+        {
+            userMessages.Add(new UserMessage { Username = user, Message = message, CurrentUser = user == usernameInput, DateSent = DateTime.Now });
+
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+    }
+
+    private async Task Send()
+    {
+        if ( /* !string.IsNullOrEmpty(usernameInput) &&  */ !string.IsNullOrEmpty(messageInput))
+        {
+            await hubConnection.SendAsync("SendMessage", usernameInput, messageInput);
+
+            isUserReadonly = true;
+            messageInput = string.Empty;
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (hubConnection is not null)
+        {
+            await hubConnection.DisposeAsync();
+        }
+    }
+
+    //public void OpenModalDialog()
+    //{
+    //  @*  ModalDisplay = "block";*@
+    //    ModalClass = "Show";
+    //    ShowBackdrop = true;
+
+    //    StateHasChanged();
+    //}
+
+    //public void CloseModalDialog()
+    //{
+    //   @* ModalDisplay = "none;";*@
+    //    ModalClass = string.Empty;
+    //    ShowBackdrop = false;
+
+    //    StateHasChanged();
+    //}
+    //protected new async void OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        await js.InvokeVoidAsync("alert", "Js Work");
+    //        StateHasChanged();
+    //    }
+    //   return;
+       
+    //}
+       
+
+    //<script src="/js/chat.js"></script>
+
+    //private HubConnection hubConnection;
+    //private List<UserMessage> userMessages = new();
+    //private string usernameInput;
+    //private string messageInput;
+    //private bool isUserReadonly = false;
+
+    //public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    hubConnection = new HubConnectionBuilder()
+    //        .WithUrl(NavigationManager.ToAbsoluteUri("/chathub"))
+    //        .Build();
+
+    //    hubConnection.On<string, string>("ReceiveMessage", (user, message) =>
+    //    {
+    //        userMessages.Add(new UserMessage { Username = user, Message = message, CurrentUser = user == usernameInput, DateSent = DateTime.Now });
+
+    //        StateHasChanged();
+    //    });
+
+    //    await hubConnection.StartAsync();
+    //}
+
+    //private async Task Send()
+    //{
+    //    if (!string.IsNullOrEmpty(usernameInput) && !string.IsNullOrEmpty(messageInput))
+    //    {
+    //        await hubConnection.SendAsync("SendMessage", usernameInput, messageInput);
+
+    //        isUserReadonly = true;
+    //        messageInput = string.Empty;
+    //    }
+    //}
+
+    //public async ValueTask DisposeAsync()
+    //{
+    //    if (hubConnection is not null)
+    //    {
+    //        await hubConnection.DisposeAsync();
+    //    }
+    //}
+
+    //bool chatting = false;
+    //string username = null;
+    //ChatClient client = null;
+    //string message = null;
+    //string newMessage = null;
+
+    //List<Message> messages = new List<Message>();
+
+    //async Task Chat()
+    //{
+    //    if (string.IsNullOrWhiteSpace(username))
+    //    {
+    //        message = "Please enter a name";
+    //        return;
+    //    }
+    //    try
+    //    {
+    //        messages.Clear();
+    //        client = new ChatClient(username, navigationManager);
+    //        client.MessageReceived += MessageReceived;
+
+    //        await client.StartAsync();
+    //        chatting = true;
+    //    }
+    //    catch (Exception e)
+    //    {
+    //        message = "Error";
+    //    }
+    //}
+
+    //void MessageReceived(object sender, MessageReceivedEventArgs e)
+    //{
+    //    bool isMine = false;
+    //    if (!string.IsNullOrWhiteSpace(e.Username))
+    //    {
+    //        isMine = string.Equals(e.Username, username, StringComparison.CurrentCultureIgnoreCase);
+    //    }
+    //    var newMsg = new Message(e.Username, e.Message, isMine);
+    //    messages.Add(newMsg);
+    //    StateHasChanged();
+    //}
+
+    //async Task DisconnectAsync()
+    //{
+    //    if (chatting)
+    //    {
+    //        await client.StopAsync();
+    //        client = null;
+    //        message = "chat ended";
+    //        chatting = false;
+    //    }
+    //}
+
+    //async Task SendAsync()
+    //{
+    //    if (chatting && !string.IsNullOrWhiteSpace(newMessage))
+    //    {
+    //        await client.SendAsync(newMessage);
+    //        newMessage = "";
+    //    }
+    //}
+
+    //class Message
+    //{
+
+    //    public Message(string username, string body, bool mine)
+    //    {
+    //        Username = username;
+    //        Body = body;
+    //        Mine = mine;
+    //    }
+
+    //    public string Username { get; set; }
+    //    public string Body { get; set; }
+    //    public bool Mine { get; set; }
+
+
+    
+}
+
+

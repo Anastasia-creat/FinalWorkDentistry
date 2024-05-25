@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <!-- Файл modals.html -->
+    <!-- Модальное окно "Записаться" -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Записаться на прием</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Форма для ввода данных -->
+                    <form id="confirmationForm">
+                        <!-- Поля для ввода -->
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="confirmationName" placeholder="Введите ваше имя">
+                        </div>
+                        <div class="mb-3">
+                            <input type="text" class="form-control phone" id="phone" placeholder="Ваш телефон +7(999)999-99-99">
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control" id="confirmationMessage" rows="3" placeholder="Опишите симптомы"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="checkbox" class="form-check-input" id="confirmationConsent">
+                            <label class="form-check-label" for="confirmationConsent">Я даю согласие на обработку своих персональных данных</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Записаться</button>
+                    </form>
+                    <!-- Сообщение после отправки формы -->
+                    <div id="confirmationMessageContainer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно "Спасибо за заказ!" -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Спасибо за заказ!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Мы свяжемся с вами в ближайшее время.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript-код для работы с модальными окнами -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('confirmationForm');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (validateForm()) {
+                $('#exampleModal').modal('hide'); // Закрыть модальное окно "Записаться"
+                $('#confirmationModal').modal('show'); // Открыть модальное окно "Спасибо за заказ!"
+            }
+        });
+    });
+
+    function validateForm() {
+        const nameInput = document.getElementById('confirmationName').value.trim();
+        const phoneInput = document.getElementById('phone').value.trim();
+        const consentCheckbox = document.getElementById('confirmationConsent');
+
+        if (nameInput === '') {
+            alert('Пожалуйста, введите ваше имя.');
+            return false;
+        }
+
+        if (phoneInput === '') {
+            alert('Пожалуйста, введите ваш телефон.');
+            return false;
+        }
+
+        if (!consentCheckbox.checked) {
+            alert('Пожалуйста, подтвердите согласие на обработку персональных данных.');
+            return false;
+        }
+
+        // Дополнительные проверки по необходимости
+
+        return true;
+    }
+    </script>
+
+</body>
+</html>

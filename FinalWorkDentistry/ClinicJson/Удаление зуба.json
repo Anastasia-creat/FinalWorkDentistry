@@ -1,0 +1,59 @@
+[
+
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Удаление зуба мудрости ",
+    "Price": 8900
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Удаление ретинированного зуба ",
+    "Price": 10900
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Удаление осколка зуба ",
+    "Price": 2100
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Резекция верхушки корня зуба ",
+    "Price": 12700
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Удаление корня зуба ",
+    "Price": 5300
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Удаление нижних зубов ",
+    "Price": 5300
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Удаление верхнего зуба мудрости ",
+    "Price": 8900
+  },
+  {
+    "ServicesId": 0,
+    "Category": "Удаление зуба",
+    "CategoryUslugi": "Удаление зуба",
+    "Name": "Наложение и снятие 1 шва ",
+    "Price": 900
+  }
+]
