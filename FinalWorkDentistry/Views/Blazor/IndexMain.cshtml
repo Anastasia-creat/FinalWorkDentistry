@@ -1,0 +1,138 @@
+﻿@using FinalWorkDentistry.BlazorComponents;
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- КОМПОНЕНТ -->
+
+<body>
+    <div>
+
+        @(await Html
+            .RenderComponentAsync<AppleMainComponent>(RenderMode.ServerPrerendered))
+
+        @*  <div style="margin-top: 100px">
+        <h5 style="text-align:center;">
+        Place
+        </h5>
+        <div id="map" style="width:600px;height:300px; margin: 10px auto 20px;"> </div>
+        </div> *@
+        <div id="map" style="width:100%;height:500px; margin: 10px auto 20px; margin-top: 50px "> </div>
+    </div>
+
+    <a asp-controller="Request" asp-action="Create">REQUEST</a>
+</body>
+
+<script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?key=AqVASWzlteewt_sjZ4-J1k5kPuSF5wBb6-I1IHAHjjFYxGab8uAEnDEGDGQCNCmO"></script>
+
+<script type="text/javascript">
+    // Обработчик события onload для скрипта Bing Maps API
+    function initMap() {
+        // Проверяем, доступен ли Microsoft.Maps
+        if (typeof Microsoft !== 'undefined' && typeof Microsoft.Maps !== 'undefined') {
+            var map;
+            var center = new Microsoft.Maps.Location(55.174773, 61.393640);
+            var mapOptions = {
+                center: center,
+                zoom: 17
+            };
+            map = new Microsoft.Maps.Map(document.getElementById('map'), mapOptions);
+
+            var pinLocation = new Microsoft.Maps.Location(55.174773, 61.393640);
+            var pin = new Microsoft.Maps.Pushpin(pinLocation, {
+                title: 'Братьев Кашириных 28',
+                color: 'red'
+            });
+            map.entities.push(pin);
+        } else {
+            console.error('API карт Bing не доступно');
+        }
+    }
+
+    // Добавляем обработчик события onload для скрипта Bing Maps API
+    var bingMapsScript = document.createElement('script');
+    bingMapsScript.type = 'text/javascript';
+    bingMapsScript.src = 'https://www.bing.com/api/maps/mapcontrol?callback=initMap&key=AqVASWzlteewt_sjZ4-J1k5kPuSF5wBb6-I1IHAHjjFYxGab8uAEnDEGDGQCNCmO';
+    document.body.appendChild(bingMapsScript);
+</script>
+@* <div style="margin-top:150px; margin-bottom: 150px">
+    <h3 style="text-align: center;">Наше местоположение</h3>
+<script src="https://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+
+<style>
+    .googleMapInfo {
+        height: 150px;
+        width: 250px;
+    }
+</style>
+
+<div id="canvas" style="height: 400px; width:1280px;"></div>
+
+<!--Устанавливаем секцию scripts, которая затем будет рендериться на мастер-странице -->
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            GetMap();
+        });
+
+        // Функция загрузки
+        function GetMap() {
+
+            google.maps.visualRefresh = true;
+            // установка основных координат
+            var Moscow = new google.maps.LatLng(55.174773, 61.393640);
+
+            // Установка общих параметров отображения карты, как масштаб, центральная точка и тип карты
+            var mapOptions = {
+                zoom: 17,
+                center: Moscow,
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
+
+            // Встраиваем гугл-карты в элемент на странице и получаем объект карты
+            var map = new google.maps.Map(document.getElementById("canvas"), mapOptions);
+
+            // Настраиваем красный маркер, который будет использоваться для центральной точки
+            var myLatlng = new google.maps.LatLng(55.174773, 61.393640);
+
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Стоматологическая клиника "Жемчужина"'
+            });
+
+            // Берем для маркера иконку с сайта google
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
+
+            // Получаем данные
+            $.getJSON('@Url.Action("GetData", "GoogleMap")', function (data) { //-----------------------
+                // Проходим по всем данным и устанавливаем для них маркеры
+                $.each(data, function (i, item) {
+                    var marker = new google.maps.Marker({
+                        'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                        'map': map,
+                        'title': item.PlaceName
+                    });
+
+                    // Берем для этих маркеров синие иконки с сайта google
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+                    // Для каждого объекта добавляем доп. информацию, выводимую в отдельном окне
+                    var infowindow = new google.maps.InfoWindow({
+                        content: "<div class='googleMapInfo'><h2>ул. " + item.PlaceName + "</h2><div><h4>Стоматологическая клиника: "
+                            + item.Clinic
+                    });
+
+                    // обработчик нажатия на маркер объекта
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infowindow.open(map, marker);
+                    });
+                })
+            });
+        }
+    </script>
+}
+
+</div>
+ *@

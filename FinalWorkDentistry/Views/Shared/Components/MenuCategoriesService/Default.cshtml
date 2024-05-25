@@ -1,0 +1,41 @@
+﻿@model IEnumerable<string>
+
+@{
+
+    string activeCategoryServ = ViewContext
+    .RouteData
+    .Values["categoryNameService"]
+    ?.ToString();
+
+
+}
+
+<div class="category">
+    @*d-flex justify-content-end*@
+
+    @* <a class="list-group-item list-group-item-action"
+    asp-action="ListView"
+    asp-controller="Service"
+    asp-route-categoryName="">
+    Все услуги
+    </a>*@
+
+
+    @foreach (var name in Model)
+    {
+        @*string activeClassServ = name == activeCategoryServ ? "list-group-item-ыусщтвфкн" : "";*@
+        @* string activeClassServ = name == activeCategoryServ ? "list-group-item-info" : ""; *@
+
+        <a class="btn" style="margin:20px;"
+           asp-action="ListView"
+           asp-controller="Service"
+           asp-route-page="1"
+           asp-route-categoryName="@name">
+            @name
+        </a>
+
+
+    }
+
+
+</div>

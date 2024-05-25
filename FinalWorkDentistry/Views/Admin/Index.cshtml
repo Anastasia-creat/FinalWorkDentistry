@@ -1,0 +1,27 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .indent {
+        margin-bottom: 15px;
+    }
+</style>
+
+<h2>Административная панель</h2>
+<div class="list-group">
+
+    <a asp-controller="Admin" asp-action="IndexRole"
+       class="button btn  btn-warning list-group-item list-group-item-action indent">
+        Права доступа
+    </a>
+
+    <a asp-controller="Admin" asp-action="ListRequest"
+       class="button btn  btn-warning list-group-item list-group-item-action indent">
+        Список записей
+    </a>
+
+ 
+</div>

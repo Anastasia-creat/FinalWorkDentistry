@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .indent{
+        margin-bottom:15px;
+    }
+</style>
+
+<h2>Управление сайтом в роли контент-менеджера</h2>
+<div class="list-group">
+
+
+    <a asp-controller="ContentManager" asp-action="AddDoctor"
+       class="button btn  btn-warning list-group-item list-group-item-action indent">
+        Добавить специалиста
+    </a>
+
+    <a asp-controller="ContentManager" asp-action="AddService"
+       class="button btn  btn-warning list-group-item list-group-item-action indent">
+        Добавить новую услугу
+    </a>
+
+    <a asp-action="EditCategoriesDoctor" asp-controller="ContentManager"
+       class="button btn btn-warning list-group-item list-group-item-action indent">
+        Редактировать категории специалистов
+    </a>
+</div>

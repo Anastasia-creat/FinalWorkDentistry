@@ -1,0 +1,147 @@
+﻿@model FinalWorkDentistry.Models.ReviewsModel;
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+
+    string pathAndQuery = Context.Request.Path + Context.Request.QueryString;
+}
+
+<h1 style="text-align: left;">@ViewData["Отзывы"]</h1>
+
+
+<style>
+    .container_form-review {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Распределяем пространство между элементами */
+        align-items: center; /* Выравниваем элементы по вертикали */
+    }
+
+    .form-container {
+        width: 60%; /* Уменьшаем ширину формы для учёта изображения */
+       /*  padding-left: 15px; */
+       
+        background-color: #6F8AA4;
+        border-radius: 5px;
+    }
+
+    .review-card {
+        background-color: #f0f0f0;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        height: 150px;
+    }
+
+    input, textarea {
+        background-color: #E9F3FA;
+        border-radius: 10px;
+    }
+
+    .marg {
+        margin-left: 10px;
+    }
+
+    .form-container input[type="tel"],
+    .form-container input[type="text"],
+    .form-container textarea {
+        width: calc(100% - 40px);
+        margin: 10px;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+
+    .image-container {
+        width: 35%; /* Устанавливаем ширину контейнера с изображением */
+    }
+
+        .image-container img {
+            width: 100%; /* Растягиваем изображение на всю ширину контейнера */
+            border-radius: 5px;
+        }
+</style>
+
+
+
+@* <p>
+    <a asp-action="Create">Create New</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+          @*   <th>
+                @Html.DisplayNameFor(model => model.ReviewId)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.NameReview)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ReviewForPage) {
+        <tr>
+           @*  <td>
+                @Html.DisplayFor(modelItem => item.ReviewId)
+            </td> *@
+            <td>
+                    @Html.DisplayFor(modelItem => item.NameReview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Text)
+            </td>
+         @*    <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td> *@
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+
+
+
+<div class="container_form-review" id="reviews">
+    <div class="form-container">
+        <!-- Форма для отправки отзыва -->
+        <h2 style="padding-bottom: 20px; padding-left:10px;">Оставьте свой отзыв</h2>
+        @using (Html.BeginForm("SubmitReview", "Review", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+          @*   <label class="marg" for="phone">Телефон:</label>
+
+            <br>
+            <input type="tel" id="phone" name="phone" required> *@
+
+            <br>
+            <label class="marg" for="name">Введите ваше имя:</label>
+
+            <br>
+            <input type="text" id="name" name="NameReview" required>
+
+            <br>
+            <label class="marg" for="message">Текст отзыва:</label>
+
+            <br>
+            <textarea id="message" name="Text" required></textarea>
+
+            <br>
+            <button class="marg btn" type="submit">Отправить отзыв</button>
+        }
+    </div>
+    <div class="image-container">
+        <!-- Картинка -->
+        <img src="/images/char.png" alt="Картинка">
+    </div>
+</div>
+

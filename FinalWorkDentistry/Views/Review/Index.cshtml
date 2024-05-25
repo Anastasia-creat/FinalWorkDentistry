@@ -1,0 +1,53 @@
+﻿@model IEnumerable<FinalWorkDentistry.Domains.Reviews>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string pathAndQuery =
+           Context.Request.Path +
+           Context.Request.QueryString;
+}
+<h2>Отзывы</h2>
+
+<p><a class="btn btn-light" asp-action="Create" >Добавить отзыв</a></p>
+
+
+<div class="container">
+  @*  <tr><th>Имя</th><th>Отзыв</th></tr>*@
+    @foreach (var item in Model)
+    {
+       @* <tr>
+            <td>@item.Name</td>
+            <td>@item.Text</td>
+        </tr>*@
+   
+        <div class="row">
+           @*   <div class="col-md-12">
+                <div class="">@item.Date</div>
+            </div> *@
+            <div @*class="col-md-auto align-content-md-start "*@ class="col-md-12">
+                <div class="">@item.NameReview</div>
+            </div>
+             <div class="col-md-12">
+                <div><h4>Отзыв</h4></div>
+            </div>
+          
+            <div class="col-md-auto">
+                <div class="">@item.Text</div><br>
+            </div>
+           
+
+            @if (User.IsInRole("ContentManager"))
+            {
+                <a  asp-action="DeleteReviewView"
+           asp-controller="ContentManager"
+           asp-route-id="@item.ReviewId"
+           asp-route-urlReturn="@pathAndQuery"
+           class="btn btn-light align-content-md-end">
+                    Удалить отзыв
+                </a>
+            }
+        </div>
+   
+    }
+</div>
+
