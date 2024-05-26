@@ -1,28 +1,37 @@
 ﻿@model FinalWorkDentistry.Models.EditServicesModel
 
 @{
-    ViewData["Title"] = "Редактирование товара";
+    ViewData["Title"] = "EditServiceView";
 }
 
-<h4>@ViewData["Title"]</h4>
+<h1>EditServiceView</h1>
 
+<h4>EditServicesModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditServiceView" enctype="multipart/form-data">
+        <form asp-action="EditServiceView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <input type="hidden" name="urlReturn" value="@Model.UrlReturn" />
-
             <div class="form-group">
+
+                <input type="hidden" name="urlReturn" value="@Model.UrlReturn" />
+
                 <label asp-for="SelectedCategoryId" class="control-label"></label>
                 <select asp-for="SelectedCategoryId"
                         asp-items="@Model.ListCategories">
                     <option>@Model.CategoryService</option>
                 </select>
             </div>
-
-           
+           @*  <div class="form-group">
+                <label asp-for="UrlReturn" class="control-label"></label>
+                <input asp-for="UrlReturn" class="form-control" />
+                <span asp-validation-for="UrlReturn" class="text-danger"></span>
+            </div> *@
+           @*  <div class="form-group">
+                <label asp-for="CategoryService" class="control-label"></label>
+                <input asp-for="CategoryService" class="form-control" />
+                <span asp-validation-for="CategoryService" class="text-danger"></span>
+            </div> *@
             <div class="form-group">
                 <label asp-for="ServiceId" class="control-label"></label>
                 <input asp-for="ServiceId" class="form-control" />
@@ -33,15 +42,13 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-           
             <div class="form-group">
                 <label asp-for="Price" class="control-label"></label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
-          
             <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -52,7 +59,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

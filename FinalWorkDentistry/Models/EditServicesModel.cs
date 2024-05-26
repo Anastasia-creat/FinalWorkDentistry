@@ -38,6 +38,7 @@ namespace FinalWorkDentistry.Models
                 Name = this.Name,
                 Price = this.Price,
                 ServiceId = this.ServiceId,
+                
                 ServiceCategory = categoryRepository.Read(SelectedCategoryId),
                 
 

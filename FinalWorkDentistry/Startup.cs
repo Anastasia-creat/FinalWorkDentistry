@@ -7,7 +7,7 @@ using FinalWorkDentistry.Domains;
 using FinalWorkDentistry.Models;
 
 using FinalWorkDentistry.UsersRoles;
-using KursovayaBlazorNet6.ServerHub;
+using FinalWorkDentistry.ServerHub;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

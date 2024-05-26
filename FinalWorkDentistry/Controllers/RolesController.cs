@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KursovayaBlazorNet6.Controllers
+namespace FinalWorkDentistry.Controllers
 {
     [Authorize(Roles="Administrator")]
     public class RolesController : Controller

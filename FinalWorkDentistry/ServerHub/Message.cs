@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 
-namespace KursovayaBlazorNet6.ServerHub
+namespace FinalWorkDentistry.ServerHub
 {
 
     

@@ -11,14 +11,14 @@ using FinalWorkDentistry.Domains;
 using FinalWorkDentistry.Models;
 
 
-namespace KursovayaBlazorNet6.Controllers
+namespace FinalWorkDentistry.Controllers
 {
  
     public class ServiceController : Controller
     {
 
         ApplicationDbContext db;
-        private int _serviceQuantityPerPage = 7;
+        private int _serviceQuantityPerPage = 10;
 
         private readonly IRepository<Service> _repositoryServices;
        private readonly IRepository<CategoryService> _repositoryCategories;
@@ -31,8 +31,9 @@ namespace KursovayaBlazorNet6.Controllers
             db = context;
         }
 
-        
-        public IActionResult ListView(string categoryName, string name)
+       
+
+        public IActionResult ListView(string categoryName, int page = 1)
         {
             var category = _repositoryCategories
                .FindByName(categoryName);
@@ -43,28 +44,29 @@ namespace KursovayaBlazorNet6.Controllers
                    category == null ||
                    p.ServiceCategory.CategoryServiceId == category.CategoryServiceId);
 
-           // добавляем механизм пагинации
+            // добавляем механизм пагинации
             var servicesSample = query
                 .OrderBy(x => x.ServiceId)
-               // .Skip((page - 1) * _serviceQuantityPerPage)
+                .Skip((page - 1) * _serviceQuantityPerPage)
                 .Take(_serviceQuantityPerPage)
-                .Select(e => e.Adapt<ServicesBriefModel>());
+                .Select(e => new ServicesBriefModel(e));
+                //.Select(e => e.Adapt<ServicesBriefModel>(e));
 
             int totalServicesQuantity = query.Count();
 
 
 
-            //int pagesQuantity = (int)
-            //    Math.Ceiling(
-            //    totalServicesQuantity /
-            //    (double)_serviceQuantityPerPage
-            //    );
-  
+            int pagesQuantity = (int)
+                Math.Ceiling(
+                totalServicesQuantity /
+                (double)_serviceQuantityPerPage
+                );
+
             var model = new ServicePageModel
             {
                 ServicesForPage = servicesSample,
-               // ActivePage = page,
-               // PagesQuantity = pagesQuantity,
+                ActivePage = page,
+                PagesQuantity = pagesQuantity,
                 CategoryName = categoryName
 
             };

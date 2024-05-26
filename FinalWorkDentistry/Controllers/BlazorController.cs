@@ -1,7 +1,7 @@
 ﻿using FinalWorkDentistry.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace KursovayaBlazorNet6.Controllers
+namespace FinalWorkDentistry.Controllers
 {
     public class BlazorController : Controller
     {

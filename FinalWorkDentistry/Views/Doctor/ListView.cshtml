@@ -383,93 +383,6 @@ asp-action="ListView">Список услуг</a>*@
 
 
 
-
-
-@* 
- <div class="row row-cols-1 row-cols-md-3 g-4 container">
-
-    @foreach (var item in Model.DoctorForPage)
-    {
-        <div class="">
-            <div class="card h-70">
-                <img class="card-img-top" height="450" width="350" src="~/DoctorsImages/@item.ImageUrl">
-
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <a  data-bs-toggle="modal" data-bs-target="#exampleModal-@item.DoctorId" style="cursor: pointer">
-                           @item.Name
-                        </a>
-                    
-                    </h5>
-                    <p class="card-text">
-                        @if (User.IsInRole("ContentManager"))
-                        {
-                            <a asp-action="EditDoctorsView"
-                               asp-controller="ContentManager"
-                               asp-route-id="@item.DoctorId"
-                               asp-route-urlReturn="@pathAndQuery"
-                               class="btn btn-light">
-                                Изменить
-                            </a>
-                        }
-                        else if (User.IsInRole("Administrator"))
-                        {
-                            <a asp-action="DeleteDoctors"
-                               asp-controller="Admin"
-                               asp-route-id="@item.DoctorId"
-                               asp-route-urlReturn="@pathAndQuery"
-                               class="btn btn-light">Уволить</a>
-                        }
-                        else
-                        {
-                             <a asp-action="AddToCart"
-                               asp-controller="Doctor"
-                               asp-route-id="@item.DoctorId"
-                               asp-route-urlReturn="@pathAndQuery"
-                               class="btn btn-light">
-                                Записаться на консультацию специалиста
-                            </a> 
-                        }
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="exampleModal-@item.DoctorId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title h-font text-center w-100" id="exampleModalLabel">Подробная информация</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body logo-font" style="text-align: center;">
-                        <dl class="row">
-
-                            <div class="col-sm-12">@item.Name</div>
-
-                            <div class="col-sm-12">@item.CategoryDoctor</div>
-
-                            <div class="col-sm-12">@item.Description</div>
-                        </dl>
-
-                        <div class="text-center mt-4">
-                            <img src="~/DoctorsImages/@item.ImageUrl" class="img-fluid" alt="Doctor Image">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-
-
-
-
-
-    } *@
-
     @section scripts {
 
     <script>
@@ -549,17 +462,5 @@ asp-action="ListView">Список услуг</a>*@
 
 
 
-
-
-@* @Html.PaginationBootstrapDoc(Model) *@
-
-@* <script>
-    var myModal = document.getElementById('myModal')
-    var myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', function () {
-        myInput.focus()
-    })
-</script> *@
 
 

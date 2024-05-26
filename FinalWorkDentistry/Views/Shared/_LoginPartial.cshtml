@@ -10,7 +10,7 @@
         <a  class="navbar-brand text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"></a>
   
   
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("IndexMain", "Blazor", new { area = "" })">
             <button  type="submit" class=" btn">Выйти</button>
         </form>
  

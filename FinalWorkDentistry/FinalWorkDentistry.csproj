@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-FinalWorkDentistry-b870c1d9-1271-4a72-bc03-72a69128129c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
@@ -22,7 +22,6 @@
     <None Include="Views\ContentManager\EditCategoriesDoctor.cshtml" />
     <None Include="Views\ContentManager\EditCategoryDoctor.cshtml" />
     <None Include="Views\ContentManager\EditDoctorView.cshtml" />
-    <None Include="Views\ContentManager\EditServiceView.cshtml" />
     <None Include="Views\ContentManager\Index.cshtml" />
     <None Include="Views\Doctor\DoctorsDetailsView.cshtml" />
     <None Include="Views\Doctor\ListView.cshtml" />
@@ -97,7 +96,7 @@
 
   <ItemGroup>
     <PackageReference Include="Mapster" Version="7.4.0" />
-    <PackageReference Include="Microsoft.AspNet.SignalR" Version="2.4.3" />
+    <PackageReference Include="Microsoft.AspNet.SignalR" Version="1.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.28" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.28" />

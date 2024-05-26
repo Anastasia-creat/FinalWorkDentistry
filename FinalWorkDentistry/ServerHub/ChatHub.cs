@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace KursovayaBlazorNet6.ServerHub
+namespace FinalWorkDentistry.ServerHub
 {
     public class ChatHub : Hub
     {

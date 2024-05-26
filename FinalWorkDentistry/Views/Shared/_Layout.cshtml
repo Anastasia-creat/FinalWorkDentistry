@@ -111,18 +111,21 @@
                           
                         }
                     </ul>
-                </div>
-
-                <div class=" " style="margin-left: auto;">
-                        <button id="openModal" class="btn ">Заказать звонок</button>
                    
-                        @* <a  class="btn ">Вход</a>  *@
+                </div>
+                <div class="" style="margin-left: auto;">
+                    <button id="openModal" class="btn" style="@(User.IsInRole("Administrator") ||
+                    User.IsInRole("ContentManager") ? "display: none" : "display: block")">Заказать звонок</button>
 
-                    </div>
-                
-                <partial name="_LoginPartial" />
+                   
 
-            </div>
+                </div>
+                <div style="@(User.IsInRole("Administrator") ||
+                    User.IsInRole("ContentManager") ? "margin-top:-35px" : "margin-top: 0px")">
+                    <partial name="_LoginPartial" />
+                </div>
+               
+          
         </nav>
 
 

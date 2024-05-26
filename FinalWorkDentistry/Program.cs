@@ -1,5 +1,5 @@
 using FinalWorkDentistry.Data;
-using KursovayaBlazorNet6;
+using FinalWorkDentistry;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

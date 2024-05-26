@@ -5,7 +5,7 @@ using Syncfusion.Blazor.Notifications;
 using System.Security.Policy;
 using System.Xml.XPath;
 
-namespace KursovayaBlazorNet6.ServerHub
+namespace FinalWorkDentistry.ServerHub
 {
     public class ChatClient : IAsyncDisposable
     {

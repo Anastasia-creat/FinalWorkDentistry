@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Web.Mvc.Expressions;
 //using System.Web.Mvc;
 
-namespace KursovayaBlazorNet6.Controllers
+namespace FinalWorkDentistry.Controllers
 {
     public class GoogleMapController : Controller
     {
