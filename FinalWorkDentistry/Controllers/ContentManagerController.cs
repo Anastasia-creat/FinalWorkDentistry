@@ -15,14 +15,17 @@ namespace FinalWorkDentistry.Controllers
         private readonly IRepository<Service> _repositoryService;
         private readonly IRepository<CategoryDoctor> _repositoryCategoryDoc;
         private readonly IRepository<CategoryService> _repositoryCategoryServ;
+        private readonly IRepository<Reviews> _repositoryReviews;
 
         public ContentManagerController(IRepository<Doctor> repositoryDoctors, IRepository<Service> repositoryService,
-            IRepository<CategoryDoctor> repositoryCategoryDoc, IRepository<CategoryService> repositoryCategoryServ)
+            IRepository<CategoryDoctor> repositoryCategoryDoc, IRepository<CategoryService> repositoryCategoryServ,
+            IRepository<Reviews> repositoryReviews)
         {
             _repositoryDoctors = repositoryDoctors;
             _repositoryService = repositoryService;
             _repositoryCategoryDoc = repositoryCategoryDoc;
             _repositoryCategoryServ = repositoryCategoryServ;
+            _repositoryReviews = repositoryReviews;
         }
 
         public IActionResult Index()
@@ -31,11 +34,28 @@ namespace FinalWorkDentistry.Controllers
         }
 
 
+
+        //Удаление отзыва
+        public IActionResult DeleteReview(long id)
+        {
+            var rev = _repositoryReviews.GetList();
+
+            if (rev != null)
+            {
+                _repositoryReviews.Delete(id);
+            }
+
+
+            return RedirectToAction("ListView", "Review");
+
+        }
+
+
         /// <summary>
         /// КАТЕГОРИИ ВРАЧЕЙ ПОЛНОСТЬЮ РАБОТАЮТ
         /// </summary>
         /// <returns></returns>
-  
+
         public IActionResult EditCategoriesDoctor()
         {
             var categories = _repositoryCategoryDoc.GetList();

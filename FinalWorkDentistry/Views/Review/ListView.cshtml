@@ -95,11 +95,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Text)
             </td>
-         @*    <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td> *@
+          <td>
+              
+               <a asp-action="DeleteReview" asp-controller="ContentManager"
+               asp-route-id="@item.ReviewId">Удалить отзыв</a>
+            </td> 
         </tr>
 }
     </tbody>
