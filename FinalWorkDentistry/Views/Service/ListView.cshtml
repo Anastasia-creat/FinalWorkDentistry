@@ -104,6 +104,9 @@
 
 @await Component.InvokeAsync("MenuCategoriesService")
 
+
+
+
 <div class="blocks">
     @foreach (var item in Model.ServicesForPage)
     {
@@ -111,9 +114,35 @@
             <div class="block-content">
                 <h5>@item.Name</h5>
              
-                <p class="price">@item.Price</p>
-                <button type="submit" class="book-button" data-bs-target="#openModalList-@item.ServiceId">Записаться</button>
+                <p style="font-size: 18px;" class="price">@item.Price</p>
+              
+                <div class="button-container">
+                    @if (User.IsInRole("ContentManager"))
 
+                    {
+                        <a asp-action="EditServiceView"
+                           asp-controller="ContentManager"
+                           asp-route-id="@item.ServiceId"
+                           asp-route-urlReturn="@pathAndQuery"
+                           class="btn">
+                            Изменить
+                        </a>
+                        <a asp-action="DeleteService"
+                           asp-controller="ContentManager"
+                           asp-route-id="@item.ServiceId"
+                           asp-route-urlReturn="@pathAndQuery"
+                           class="btn" style="margin-top:5px;">
+                            Удалить
+                        </a>
+                    }
+                    else
+                    {
+                        <button type="submit" class="book-button" 
+                        data-bs-target="#openModalList-@item.ServiceId">Записаться</button>
+                    }
+                    @*   <button class="btn" style="margin-top: auto;">Записаться</button> *@
+
+                </div>
             </div>
         </div>
 

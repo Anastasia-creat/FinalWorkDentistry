@@ -1,4 +1,4 @@
-﻿@model FinalWorkDentistry.Domains.CategoryDoctor
+﻿@model FinalWorkDentistry.Domains.CategoryService
 
 @{
     ViewData["Title"] = "Редактирование категорий";
@@ -8,15 +8,14 @@
 <h1>@ViewData["Title"]</h1>
 
 
-<hr />
-<div class="row">
+<div class="row" style="margin-top: 30px;">
     <div class="col-md-4">
-        <form asp-action="EditCategoryDoctor">
+        <form asp-action="EditCategoryService">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="CategoryDoctorId" class="control-label"></label>
-                <input readonly asp-for="CategoryDoctorId" class="form-control" />
-                <span asp-validation-for="CategoryDoctorId" class="text-danger"></span>
+                <label  asp-for="CategoryServiceId" class="control-label"></label>
+                <input readonly asp-for="CategoryServiceId" class="form-control" />
+                <span asp-validation-for="CategoryServiceId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -24,19 +23,17 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Сохранить" class=" btn" />
+                <input type="submit" value="Сохранить" class="btn" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-controller="Doctor"
+    <a asp-controller="Service"
        asp-action="ListView">Назад в каталог</a>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -8,7 +8,9 @@ namespace FinalWorkDentistry.Domains
     public class CategoryDoctor
     {
         [Key]
+        [Display(Name = "Номер")]
         public long CategoryDoctorId { get; set; }
+        [Display(Name = "Название")]
         public string Name { get; set; }
 
         public virtual ICollection<Doctor> DoctorOfCategory { get; set; }

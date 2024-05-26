@@ -89,7 +89,7 @@
                 </div>
               
                
-                <div class="navbar-collapse collapse " style="margin-left: 110px" id="navbarSupportedContent">
+                <div class="navbar-collapse collapse " style="margin-left: 120px" id="navbarSupportedContent">
                     <ul class="navbar-nav text-center">
                         <a class="navbar-brand btn_header" asp-controller="Blazor" asp-action="IndexMain">Главная</a>
                         <a class="navbar-brand btn_header" asp-controller="Service" asp-action="ListView">Услуги</a>
@@ -115,7 +115,9 @@
                 </div>
                 <div class="" style="margin-left: auto;">
                     <button id="openModal" class="btn" style="@(User.IsInRole("Administrator") ||
-                    User.IsInRole("ContentManager") ? "display: none" : "display: block")">Заказать звонок</button>
+                    User.IsInRole("ContentManager") ? "background-color: #6F8AA4; color:  #6F8AA4" : "display: block")">
+                        Заказать звонок
+                    </button>
 
                    
 

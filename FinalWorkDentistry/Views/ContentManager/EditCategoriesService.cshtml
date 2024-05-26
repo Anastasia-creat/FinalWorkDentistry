@@ -1,0 +1,46 @@
+﻿@model IEnumerable<FinalWorkDentistry.Domains.CategoryService>
+
+@{
+    ViewData["Title"] = "Редактирование категорий услуг";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p style="margin-top: 30px;">
+    <a asp-action="AddCategoryService" class="btn">
+        Добавить новую категорию
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryServiceId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryServiceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+                <td>
+                    @Html.ActionLink("Изменить", "EditCategoryService", new { id = item.CategoryServiceId }) |
+                    @Html.ActionLink("Удалить", "DeleteCategoryService", new { id = item.CategoryServiceId })
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a asp-controller="Service"
+       asp-action="ListView">Вернуться в список услуг клиники</a>
+</div>

@@ -158,7 +158,7 @@ namespace FinalWorkDentistry.Controllers
 
 
 
-
+        //---------------------------------------------------------------------------
         public IActionResult AddService()
         {
             var categories = _repositoryCategoryServ.GetList();
@@ -209,8 +209,74 @@ namespace FinalWorkDentistry.Controllers
         }
 
 
+        public IActionResult DeleteService(long id)
+        {
+            var service = _repositoryService.GetList();
+
+            if (service != null)
+            {
+                _repositoryService.Delete(id);
+            }
 
 
+            return RedirectToAction("ListView", "Service");
+
+        }
+
+        //---------------------------------------------------------------------
+        //Категории услуг
+        public IActionResult EditCategoriesService()
+        {
+            var categories = _repositoryCategoryServ.GetList();
+            return View(categories);
+        }
+
+        public IActionResult AddCategoryService()
+        {
+            var category = new CategoryService();
+            return View("EditCategoryService", category);
+        }
+
+        public IActionResult DeleteCategoryService(long id)
+        {
+            var category = _repositoryCategoryServ.ReadWithRelations(id);
+            if (category.ServiceOfCategory.Count() > 0)
+            {
+                ViewBag.ErrorMessage = "Нельзя удалять категорию с товарами!";
+                return View("Error");
+            }
+            else
+            {
+                _repositoryCategoryServ.Delete(id);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult EditCategoryService(long id)
+        {
+            var category = _repositoryCategoryServ.Read(id);
+            return View(category);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategoryService(CategoryService model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.CategoryServiceId == 0)
+                {
+                    _repositoryCategoryServ.Create(model);
+                }
+                else
+                {
+                    _repositoryCategoryServ.Update(model);
+                }
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
 
         private void UploadImage(EditDoctorsModel editModel)
         {

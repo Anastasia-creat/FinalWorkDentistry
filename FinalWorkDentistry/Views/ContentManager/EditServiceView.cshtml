@@ -1,12 +1,12 @@
 ﻿@model FinalWorkDentistry.Models.EditServicesModel
 
 @{
-    ViewData["Title"] = "EditServiceView";
+    ViewData["Title"] = "Редактирование услуги";
 }
 
-<h1>EditServiceView</h1>
 
-<h4>EditServicesModel</h4>
+
+<h4>@ViewData["Title"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -16,7 +16,7 @@
 
                 <input type="hidden" name="urlReturn" value="@Model.UrlReturn" />
 
-                <label asp-for="SelectedCategoryId" class="control-label"></label>
+                <label asp-for="SelectedCategoryId" class="control-label" ></label>
                 <select asp-for="SelectedCategoryId"
                         asp-items="@Model.ListCategories">
                     <option>@Model.CategoryService</option>
@@ -32,7 +32,7 @@
                 <input asp-for="CategoryService" class="form-control" />
                 <span asp-validation-for="CategoryService" class="text-danger"></span>
             </div> *@
-            <div class="form-group">
+            <div class="form-group" style="display:none;">
                 <label asp-for="ServiceId" class="control-label"></label>
                 <input asp-for="ServiceId" class="form-control" />
                 <span asp-validation-for="ServiceId" class="text-danger"></span>
@@ -48,14 +48,14 @@
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="ListView" asp-controller="Service">Вернуться к списку услуг</a>
 </div>
 
 @section Scripts {
