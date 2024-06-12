@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <None Include="Views\Admin\Create.cshtml" />
-    <None Include="Views\Admin\DeleteDoctors.cshtml" />
     <None Include="Views\Admin\DeleteRequest.cshtml" />
     <None Include="Views\Admin\Edit.cshtml" />
     <None Include="Views\Admin\Index.cshtml" />
@@ -25,7 +24,6 @@
     <None Include="Views\ContentManager\Index.cshtml" />
     <None Include="Views\Doctor\DoctorsDetailsView.cshtml" />
     <None Include="Views\Doctor\ListView.cshtml" />
-    <None Include="Views\GoogleMap\Index.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Privacy.cshtml" />
     <None Include="Views\Permission\Index.cshtml" />
@@ -46,7 +44,6 @@
     <None Include="Views\Shared\Components\MenuCategories\Default.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\MainLayout.razor" />
-    <None Include="Views\Shared\_Layout - Blazor.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />

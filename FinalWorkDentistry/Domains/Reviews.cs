@@ -11,10 +11,6 @@ namespace FinalWorkDentistry.Domains
         public long ReviewId { get; set; }
         public string NameReview { get; set; }
         public string Text { get; set; }
-        //public string Date { get; set; }
-
-
-        //public virtual CategoryDoctor ReviewsCategory { get; set; }
-
+       
     }
 }

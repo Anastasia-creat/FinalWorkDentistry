@@ -1,7 +1,7 @@
 
 using FinalWorkDentistry.Abstract;
 using FinalWorkDentistry.AutoMapping;
-using FinalWorkDentistry.BlazorServices;
+
 using FinalWorkDentistry.DataAccessLayer;
 using FinalWorkDentistry.Domains;
 using FinalWorkDentistry.Models;
@@ -25,6 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
+using FinalWorkDentistry.BlazorServices;
 
 
 namespace FinalWorkDentistry
@@ -69,12 +70,10 @@ namespace FinalWorkDentistry
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc();
-
             services.AddControllersWithViews();
             services.AddRazorPages();
-
             services.AddServerSideBlazor();
-            // services.AddSingleton<WeatherForecastService>();
+
             services.AddResponseCompression(opts =>
             {
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" });
@@ -88,17 +87,16 @@ namespace FinalWorkDentistry
          //   services.AddTransient<DoctorBriefModel>();
 
             services.AddTransient<IRepository<Doctor>, DoctorSqlRepository>();
-                services.AddTransient<IRepository<Reviews>, ReviewsSqlRepository>();
+            services.AddTransient<IRepository<Reviews>, ReviewsSqlRepository>();
             services.AddTransient<IRepository<Request>, RequestSqlRepository>();
             services.AddTransient<IRepository<CategoryService>, CategoryUslugiSqlRepository>();
-                services.AddTransient<IRepository<CategoryDoctor>, CategoryMedicSqlRepository>();
+            services.AddTransient<IRepository<CategoryDoctor>, CategoryMedicSqlRepository>();
 
-                // добавили сервис SignalR
-                services.AddSignalR();
+            services.AddSignalR();
 
             services.AddTransient<BlazorService>();
             services.AddTransient<BlazorDoctors>();
-           
+
 
             services.AddSmart();
 
@@ -150,23 +148,6 @@ public void Configure(
 
                 app.UseEndpoints(endpoints =>
                 {
-                    /*
-                    endpoints.MapControllerRoute(
-                        name: "navCategories",
-                        pattern: "{categoryName}/Page{page}",
-                        defaults: new { Controller = "Product", action = "ListView" });
-
-                    endpoints.MapControllerRoute(
-                        name: "navCategories",
-                        pattern: "{categoryName}",
-                        defaults: new { Controller = "Product", action = "ListView", page = 1 });
-
-                    endpoints.MapControllerRoute(
-                        name: "navigationPage",
-                        pattern: "Products/Page{page}", // Products/Page10
-                        defaults: new { Controller = "Product", action = "ListView" });
-                    */
-
                     endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller=Blazor}/{action=IndexMain}/{id?}");
@@ -184,14 +165,10 @@ public void Configure(
                     DataSeeder.SeedUsers(userManager);
                 }
 
-            // добавляем маршрут для поодключения к чату!
             app.UseEndpoints(endpoints =>
-
-
             {
                 endpoints.MapBlazorHub();
                 endpoints.MapHub<ChatHub>("/chathub");
-                // endpoints.MapFallbackToPage("/_Host");
             });
         }
         }

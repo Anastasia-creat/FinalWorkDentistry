@@ -1,0 +1,202 @@
+﻿
+/*AppleComponetn*/
+
+.container-with-Zub {
+    display: flex;
+    margin-top: 120px; /* Измените значение на нужный вам отступ */
+    margin-bottom: 120px;
+}
+
+.left-content {
+    flex: 2;
+}
+
+.right-content {
+    flex: 1;
+    text-align: right; /* Помещает изображение вправо */
+}
+
+
+
+
+.card-container {
+    display: flex;
+    font-size: 22px;
+    margin-bottom: 200px;
+    flex-wrap: wrap;
+    justify-content: space-between
+}
+
+.card {
+    display: flex;
+    margin-right: 10px;
+    border-radius: 35px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    background-size: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    color: black;
+}
+
+h2 {
+    margin: 0; /* Убираем внешние отступы у заголовка */
+}
+
+.card-content {
+    flex-grow: 1; /* Растягиваем контент на всю доступную ширину */
+    padding: 20px; /* Отступы внутри карточки */
+    word-wrap: break-word;
+}
+
+.card {
+    color: black;
+    display: flex;
+    align-items: flex-start;
+}
+
+.card-logo {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.card-body {
+    word-wrap: break-word;
+    margin-top: 0;
+}
+
+.card-text {
+    width: 300px;
+}
+
+.image {
+    width: 200px; /* Ширина изображения */
+    height: 200px; /* Высота изображения */
+    background-size: cover; /* Растягиваем изображение на всю доступную площадь */
+    background-position: center; /* Центрируем изображение */
+}
+
+
+/*Закончился AppleComponent*/
+
+
+/*
+    BlazorMessage
+*/
+.chat-button {
+    position: fixed;
+    bottom: 20px; /* Расположение кнопки снизу */
+    right: 20px; /* Расположение кнопки справа */
+    z-index: 9999; /* Чтобы кнопка была поверх всех других элементов */
+    /*  background-color: #007bff; */ /* Цвет фона кнопки */
+
+    background-color: #9ACEEB;
+    color: white; /* Цвет текста кнопки */
+    border: none;
+    border-radius: 50%; /* Для круглой формы кнопки */
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+}
+
+.chat-header {
+    /* Белый цвет текста */
+    padding: 10px;
+    font-weight: bold;
+    background-color: #B0C4DE;
+    color: #fff;
+    padding: 10px;
+}
+
+    .chat-header h3 {
+        margin: 0;
+    }
+
+    .chat-header p {
+        margin: 5px 0;
+    }
+
+.chat_btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.chat-message-input {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+
+    .chat-message-input input[type="text"] {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+
+
+    .chat-message-input input[type="text"] {
+        width: calc(100% - 20px);
+        border: none;
+        outline: none;
+    }
+
+        .chat-message-input input[type="text"]::placeholder {
+            color: #cccccc;
+        }
+
+
+.main {
+    position: fixed;
+    bottom: 20px; /* Указываете желаемый отступ от нижнего края страницы */
+    /*  left: 1100px; */ /* Можете также указать отступ от правого края страницы */
+    /* Дополнительные стили */
+    width: 350px; /* Ширина контейнера чата */
+    height: 700px; /* Высота контейнера чата */
+    background-color: #f0f0f0; /* Цвет фона контейнера */
+    right: 50px;
+    border-radius: 12px; /* Закругление углов */
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.message-input_btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+#chat-container {
+    position: fixed; /* Позиционируем чат фиксированно */
+    z-index: 9999; /* Устанавливаем z-index чата поверх остальных элементов */
+}
+
+/*End*/
+
+/*Map*/
+.map_logo {
+    text-align: center;
+    font-size: 30px;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.map {
+    width: 100%;
+    height: 500px;
+    margin: 10px auto 20px;
+    margin-top: 10px;
+}

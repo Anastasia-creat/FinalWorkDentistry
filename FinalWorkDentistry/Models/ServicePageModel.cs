@@ -31,7 +31,7 @@ namespace FinalWorkDentistry.Models
 
 
 
-
+        public string SearchString { get; set; }
 
 
 

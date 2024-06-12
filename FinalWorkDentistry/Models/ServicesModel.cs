@@ -11,9 +11,6 @@ namespace FinalWorkDentistry.Models
         public ServicesModel()
         { }
 
-     
-
-        //Uslugi new
         [Display(Name = "Категория на услуги")]
         public string CategoryService { get; set; }
 
@@ -24,13 +21,9 @@ namespace FinalWorkDentistry.Models
         [Display(Name = "Название")]
         public string Name { get; set; }
 
-        
-
         [Display(Name = "Цена")]
         [DataType(DataType.Currency)]
         public int Price { get; set; }
-
-       
 
         public ServicesModel(Service entity)
         {

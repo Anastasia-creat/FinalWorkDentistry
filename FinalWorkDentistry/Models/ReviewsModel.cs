@@ -18,16 +18,7 @@ namespace FinalWorkDentistry.Models
         [Display(Name = "Отзыв")]
         public string Text { get; set; }
 
-        //[Display(Name = "Дата")]
-        //public string Date { get; set; }
-
-
-
-
         public IEnumerable<ReviewBriefModel> ReviewForPage { get; set; }
-
-
-
 
         public ReviewsModel()
         {

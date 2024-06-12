@@ -23,10 +23,10 @@ namespace FinalWorkDentistry.Models
         public string CategoryDoctor { get; set; }
 
 
-      //  public CategoryDoctor CategoryDoctor2 { get; set; }
+        //  public CategoryDoctor CategoryDoctor2 { get; set; }
 
 
-
+        public string SearchString { get; set; }
 
 
 

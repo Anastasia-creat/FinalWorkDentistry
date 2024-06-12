@@ -7,7 +7,7 @@ namespace FinalWorkDentistry.Models;
 public class RequestModel
 {
     [Display(Name = "Номер заявки")]
-    [HiddenInput(DisplayValue = false)]
+  
     public long RequestId { get; set; }
 
     [Display(Name = "Клиент")]

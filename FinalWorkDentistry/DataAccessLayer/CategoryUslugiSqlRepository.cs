@@ -64,10 +64,6 @@ namespace FinalWorkDentistry.DataAccessLayer
             _context.SaveChanges();
         }
 
-        //CategoryUslugi IRepository<CategoryUslugi>.FindByName(string name)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         IEnumerable<CategoryService> IRepository<CategoryService>.GetList()
         {
@@ -75,20 +71,7 @@ namespace FinalWorkDentistry.DataAccessLayer
 
         }
 
-        //CategoryService IRepository<CategoryService>.Read(long id)
-        //{
-        //    var entry = _context.CategoryService.Find(id);
-        //    return entry;
-        //}
-
-        //CategoryService IRepository<CategoryService>.ReadWithRelations(long id)
-        //{
-        //    var entry = _context
-        //         .CategoryService
-        //         // .Include(c => c.DoctorsOfCategory)
-        //         .FirstOrDefault(c => c.CategoryServiceId == id);
-        //    return entry;
-        //}
+        
 
         
     }

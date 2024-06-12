@@ -45,7 +45,7 @@ namespace FinalWorkDentistry.BlazorServices
                 .ToList());
         }
 
-       
+
 
         public List<DoctorModel> GetDoctors(string categoryName, int page)
         {

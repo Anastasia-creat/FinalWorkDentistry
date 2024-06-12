@@ -11,14 +11,14 @@ namespace FinalWorkDentistry.BlazorServices
     {
         private readonly IRepository<Service> _repositoryService;
         private readonly IRepository<CategoryService> _repositoryCategory;
-      
+
 
         public BlazorService(IRepository<Service> repository,
             IRepository<CategoryService> repositoryCategory)
         {
             _repositoryService = repository;
             _repositoryCategory = repositoryCategory;
-           
+
         }
 
         public int CountTotalPages(string categoryName)
@@ -44,7 +44,7 @@ namespace FinalWorkDentistry.BlazorServices
             return Task.FromResult(_repositoryCategory.GetList().ToList());
         }
 
-       
+
         public List<ServicesBriefModel> GetServices(string categoryName, int page)
         {
             // 0) ищем в базе категорию по имени
@@ -68,7 +68,7 @@ namespace FinalWorkDentistry.BlazorServices
             return productsSample.ToList();
         }
 
-       
+
 
         public ServicesModel GetServiceDetails(long id)
         {
@@ -77,6 +77,6 @@ namespace FinalWorkDentistry.BlazorServices
             return model;
         }
 
-       
+
     }
 }

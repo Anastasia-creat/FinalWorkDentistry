@@ -1,0 +1,410 @@
+﻿/*
+    DOCTORS - LISTVIEW
+*/
+
+
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.block {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Тени */
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    height: 350px; /* Растягиваем карточку под содержимое */
+}
+
+    .block:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Тени при наведении */
+    }
+
+.block-content {
+    padding: 20px;
+}
+
+.block p {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+.block .price {
+    font-weight: bold;
+    margin-top: 10px;
+    color: blue; /* Цвет цены */
+}
+
+.book-button {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #536D86;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: bottom 0.3s ease;
+}
+
+.block:hover .book-button {
+    bottom: 20px;
+}
+
+.book-button:hover {
+    background-color: #536D86;
+    color: #3f555a;
+}
+
+
+.block-content {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.image-container {
+    position: relative;
+    width: 40%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #536D86;
+    border-radius: 5px;
+}
+
+.image-wrapper {
+    position: relative;
+}
+
+.image-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7); /* Прозрачный белый цвет */
+    z-index: -1; /* Устанавливаем более низкий уровень z-index, чтобы фон был под изображением */
+}
+
+
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+
+.info-container {
+    width: 55%; /* Ширина контейнера для информации о докторе */
+    display: flex;
+    flex-direction: column;
+}
+
+    .info-container h5 {
+        margin: 0;
+    }
+
+    .info-container p {
+        margin: 5px 0;
+    }
+
+.border {
+    border-bottom: 1px solid #ccc; /* Горизонтальная линия */
+    margin-bottom: 10px; /* Отступ после горизонтальной линии */
+}
+
+.book-button {
+    align-self: flex-end; /* Кнопка прижимается к нижнему краю */
+    background-color: #536D86;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    .book-button:hover {
+        background-color: #3f555a;
+    }
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+/*END DOCTORS*/
+
+
+
+/*
+    REVIEWS - CREATE
+*/
+
+.container_form-review {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+.form-container {
+    width: 30%;
+    padding-left: 15px; /* Устанавливаем нулевой внутренний отступ */
+    background-color: #536D86;
+    border-radius: 5px;
+    /* Добавляем отступ снизу между контейнерами */
+}
+
+
+
+.review-card {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 150px;
+}
+
+input, textarea {
+    background-color: #E9F3FA;
+    border-radius: 10px;
+}
+
+
+
+.marg {
+    margin-left: 10px;
+}
+
+
+.form-container input[type="tel"],
+.form-container input[type="text"],
+.form-container textarea {
+    width: calc(100% - 40px); /* Ширина поля ввода с учетом отступов по 20px с каждой стороны */
+    margin: 10px; /* Отступы по 10px с каждой стороны */
+    padding: 5px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитываем padding и border в общей ширине элемента */
+}
+
+/*LISTVIEW*/
+.container_form-review {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Распределяем пространство между элементами */
+    align-items: center; /* Выравниваем элементы по вертикали */
+}
+
+.form-container {
+    width: 60%; /* Уменьшаем ширину формы для учёта изображения */
+    /*  padding-left: 15px; */
+
+    background-color: #6F8AA4;
+    border-radius: 5px;
+}
+
+.review-card {
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    height: 150px;
+}
+
+input, textarea {
+    background-color: #E9F3FA;
+    border-radius: 10px;
+}
+
+.marg {
+    margin-left: 10px;
+}
+
+.form-container input[type="tel"],
+.form-container input[type="text"],
+.form-container textarea {
+    width: calc(100% - 40px);
+    margin: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.image-container {
+    width: 35%; /* Устанавливаем ширину контейнера с изображением */
+}
+
+    .image-container img {
+        width: 100%; /* Растягиваем изображение на всю ширину контейнера */
+        border-radius: 5px;
+    }
+
+/*END REVIEWS*/
+
+/*SERVICE - LISTVIEW*/
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.blocks {
+    display: grid;
+    /*  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));  */
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    gap: 20px;
+    padding: 20px;
+}
+
+.block {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    height: 250px;
+}
+
+    .block:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+.block-content {
+    padding: 20px;
+}
+
+.block p {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+.block .price {
+    font-weight: bold;
+    margin-top: 10px;
+    color: blue;
+}
+
+.book-button {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #536D86;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: bottom 0.3s ease;
+}
+
+.block:hover .book-button {
+    bottom: 20px;
+}
+
+.book-button:hover {
+    background-color: #536D86;
+    color: #3f555a;
+}
+
+.search-input {
+    border-radius: 10px;
+    padding: 5px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Добавление тени */
+}
+
+/*SEARCH*/
+h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.blocks {
+    display: grid;
+    /*  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));  */
+    grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+    gap: 20px;
+    padding: 20px;
+}
+
+.block {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    height: 250px;
+}
+
+    .block:hover {
+        transform: translateY(-5px);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+.block-content {
+    padding: 20px;
+}
+
+.block p {
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+}
+
+.block .price {
+    font-weight: bold;
+    margin-top: 10px;
+    color: blue;
+}
+
+.book-button {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #536D86;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: bottom 0.3s ease;
+}
+
+.block:hover .book-button {
+    bottom: 20px;
+}
+
+.book-button:hover {
+    background-color: #536D86;
+    color: #3f555a;
+}
+
+
+    /*END*/
+

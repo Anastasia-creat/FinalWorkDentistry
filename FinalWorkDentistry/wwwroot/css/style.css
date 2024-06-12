@@ -145,18 +145,10 @@ card_center {
     margin-top: 5px;*/
 }
 
-.navbar {
-    /* background-color: steelblue;*/
-    /* background-color: cadetblue;*/
-    /* background-color: #ccd6f0;*/
-    /* margin-top: 50px;*/
-}
+
 
 .btn {
-    /* background-color: #4e3875;
-    background-color: #13062b;*/
-    /*background-color: #8FA9D6;*/
-   /* background-color: #6F85B8;*/
+   
     color: white;
     width: auto;
     text-align: center;
@@ -211,29 +203,14 @@ a {
     margin-left: 165px;
 }
 
-/*.container_navbar .navbar-brand {
-        display: inline-block;
-        font-size: 20px;
-        text-align:center;*/
-/*color: deeppink;*/
 
-/*}*/
-
-
-/*a {
-    color:#070547;
-}*/
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
 }
 
-/*.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}*/
+
 
 .border-top {
     border-top: 1px solid #e5e5e5;
@@ -259,29 +236,7 @@ button.accept-policy {
     background-color: #909ef5;
 }
 
-/*.main {
-    display: flex;*/
-/* margin-left: 600px;
-    position: relative;
-    top: 10px;
-    width: 400px;
-    height: 600px;*/
-/*float: right;
-    position: sticky;
-}*/
 
-/*.wrapper {
-    position: fixed;
-    margin: auto;
-    position: relative;
-    margin-top: 200px;
-    float: right;
-    height: 550px;
-    background-color: #d5d8eb;
-    width: 350px;
-    color: #dee0e3;
-    overflow-y: scroll;
-}*/
 
 .container-3 {
     position: absolute; /* добавили */
@@ -290,15 +245,7 @@ button.accept-policy {
 }
 
 
-/*
-.form-control {
-    display: block;
-    border: 1px solid #909ef5;
-    
-    color: cadetblue;
-    border-radius: 8px;
-    background-color: #E9F3FA;
-}*/
+
 
 .name1 {
     text-align: center;

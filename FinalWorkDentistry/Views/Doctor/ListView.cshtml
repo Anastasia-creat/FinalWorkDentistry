@@ -1,13 +1,13 @@
-﻿@using FinalWorkDentistry.Helpers;
+﻿﻿@using FinalWorkDentistry.Helpers;
 @using FinalWorkDentistry.UsersRoles
 @using Microsoft.AspNetCore.Authorization
-  @model FinalWorkDentistry.Models.DoctorPageModel  
+  @model FinalWorkDentistry.Models.DoctorPageModel
   @inject IAuthorizationService AuthorizationService
 @* @model FinalWorkDentistry.Models.DoctorModel *@
 @*  @inject FinalWorkDentistry.Models.DoctorModel docModel *@
 
- @* @inject FinalWorkDentistry.Models.DoctorPageModel categDoc; *@
- 
+@* @inject FinalWorkDentistry.Models.DoctorPageModel categDoc; *@
+
 
 
 @*<a class="btn btn-lg btn-light"
@@ -15,7 +15,7 @@ asp-controller="Service"
 asp-action="ListView">Список услуг</a>*@
 
 @{
-   
+
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = Model.CategoryDoctor == null
         ? ""
@@ -55,9 +55,6 @@ asp-action="ListView">Список услуг</a>*@
         cursor: pointer;
         overflow: hidden;
         height: 350px; /* Растягиваем карточку под содержимое */
-
-
-       
     }
 
         .block:hover {
@@ -109,7 +106,6 @@ asp-action="ListView">Список услуг</a>*@
         padding: 20px;
         display: flex;
         justify-content: space-between;
-       
     }
 
     .image-container {
@@ -135,11 +131,11 @@ asp-action="ListView">Список услуг</a>*@
     }
 
 
-        .image-wrapper img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
+    .image-wrapper img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
 
 
     .info-container {
@@ -178,12 +174,10 @@ asp-action="ListView">Список услуг</a>*@
 
     .button-container {
         display: flex;
-        flex-direction: column; 
-        justify-content: space-between; 
-        height: 100%; 
-       
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
     }
-
 
 </style>
 
@@ -194,14 +188,14 @@ asp-action="ListView">Список услуг</a>*@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title btn_header" id="exampleModalLabel" >Записаться на прием</h4>
-              
+
                 <img class="close" src="~/images/close.png" style="cursor: pointer" />
 
             </div>
             <div class="modal-body" style="color: black">
                 <form id="contactForm">
 
-                 
+
                     <div class="mb-3">
 
                         <input type="text" class="form-control" id="name" placeholder="Введите ваше имя" required>
@@ -210,11 +204,11 @@ asp-action="ListView">Список услуг</a>*@
                     <div class="mb-3">
                         <input type="text" class="form-control phone" id="phone" placeholder="Ваш телефон +7(999)999-99-99" required>
                     </div>
-                  
+
                     <div class="mb-3">
                         <textarea class="form-control" id="area" rows="3" placeholder="Опишите симптомы"></textarea>
                     </div>
-                   
+
 
                     <button type="submit" class="btn">Заказать звонок</button>
 
@@ -234,7 +228,7 @@ asp-action="ListView">Список услуг</a>*@
 
     <div id="thankYouModal" class="modal">
         <div class="modal-content">
-            @*   <span class="thank-you-close">&times;</span> 
+            @*   <span class="thank-you-close">&times;</span>
             <img class="thank-you-close" src="~/images/close.png" style="cursor: pointer" />
             <h5 style="text-align: center;">Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.</h5>
 
@@ -263,7 +257,7 @@ asp-action="ListView">Список услуг</a>*@
                     <p class="description">@item.Description</p>
                     <div class="button-container">
                         @if (User.IsInRole("ContentManager"))
-                          
+
                         {
                             <a asp-action="EditDoctorView"
                                asp-controller="ContentManager"
@@ -277,17 +271,19 @@ asp-action="ListView">Список услуг</a>*@
                                asp-route-id="@item.DoctorId"
                                asp-route-urlReturn="@pathAndQuery"
                                class="btn" style="margin-top:5px;">
-                               Удалить
-                            </a> 
+                                Удалить
+                            </a>
                         }
                         else
                         {
-                            <button type="submit" 
-                                style="margin-top: auto;" class="button btn"
-                                data-bs-target="#openModalList-@item.DoctorId">Записаться</button>
+                            <button type="submit"
+                                    style="margin-top: auto;" class="button btn"
+                                    data-bs-target="#openModalList-@item.DoctorId">
+                                Записаться
+                            </button>
                         }
-                      @*   <button class="btn" style="margin-top: auto;">Записаться</button> *@
-                       
+                        @*   <button class="btn" style="margin-top: auto;">Записаться</button> *@
+
                     </div>
                 </div>
             </div>
@@ -383,7 +379,7 @@ asp-action="ListView">Список услуг</a>*@
 
 
 
-    @section scripts {
+@section scripts {
 
     <script>
 
@@ -457,10 +453,4 @@ asp-action="ListView">Список услуг</a>*@
 
 
     </script>
-    }
-
-
-
-
-
-
+}

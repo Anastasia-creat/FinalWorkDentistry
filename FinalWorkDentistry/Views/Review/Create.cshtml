@@ -1,57 +1,9 @@
 ﻿@model FinalWorkDentistry.Models.ReviewsModel
 @{
-    Layout = "~/Views/Shared/_Layout - Blazor.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    .container_form-review {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
 
-   
-
-    .form-container {
-        width: 30%;
-        padding-left: 15px; /* Устанавливаем нулевой внутренний отступ */
-        background-color: #536D86;
-        border-radius: 5px;
-        /* Добавляем отступ снизу между контейнерами */
-    }
-
-
-
-    .review-card {
-        background-color: #f0f0f0;
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        height: 150px;
-    }
-
-    input, textarea {
-        background-color: #E9F3FA;
-        border-radius: 10px;
-    }
-
-
-
-    .marg {
-        margin-left: 10px;
-    }
-
-
-    .form-container input[type="tel"],
-    .form-container input[type="text"],
-    .form-container textarea {
-        width: calc(100% - 40px); /* Ширина поля ввода с учетом отступов по 20px с каждой стороны */
-        margin: 10px; /* Отступы по 10px с каждой стороны */
-        padding: 5px; /* Внутренние отступы */
-        box-sizing: border-box; /* Учитываем padding и border в общей ширине элемента */
-    }
-
-</style>
 
 
 <div class="container_form-review" id="reviews">
@@ -72,37 +24,7 @@
     </div>
 </div>
 
-@* <form method="post">
-   
-           <h2>Отзыв</h2>
-   
-    <p>
-        <label for="name">Как к Вам обращаться?</label><br />
-        <input type="text" name="name" />
-    </p>
 
-
-    <p>
-        <label for="text">Ваш отзыв:</label><br />
-        <textarea name="text" ></textarea>
-    </p>
-
-    <p>
-        <label for="text">Поставьте сегодняшнюю дату</label><br />
-        <input type="date" id="date" name="date" />
-    </p>
-
-    <label >Я даю согласие на обработку персональных данных</label>
-    <input type="checkbox" name="isAgree" value="true" />
-
-    <p>
-       @* <input btn btn-light type="submit" value="Отправить" />
-       <button type="submit" class="btn btn-light">Отправить</button>
-    </p>
-
-     
-
-</form> *@
 
 
 

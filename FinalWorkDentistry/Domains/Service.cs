@@ -16,7 +16,7 @@ namespace FinalWorkDentistry.Domains
 
         public virtual CategoryService ServiceCategory { get; set; }
 
-      //  public virtual ICollection<OrderRecord> OrderRecordsForServices { get; set; }
+     
 
         public int Price { get; set; }
     }

@@ -1,0 +1,301 @@
+﻿@model IEnumerable<FinalWorkDentistry.Domains.Service>
+
+
+    @{
+    string pathAndQuery = Context.Request.Path + Context.Request.QueryString;
+    }
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+
+   
+    <style>
+    h1 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    .blocks {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .block {
+        position: relative;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+        .block:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .block-content {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+
+    .block h5 {
+        margin: 0 0 10px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .block p {
+        font-size: 14px;
+        color: #333;
+        margin: 0;
+    }
+
+    .block .price {
+        font-weight: bold;
+        margin-top: 10px;
+        color: blue;
+    }
+
+    .book-button {
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #536D86;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: bottom 0.3s ease;
+    }
+
+    .block:hover .book-button {
+        bottom: 20px;
+    }
+
+    .book-button:hover {
+        background-color: #536D86;
+        color: #3f555a;
+    }
+
+    </style>
+</head>
+<body>
+
+    <div style="margin-left: 20px;">
+
+ 
+    <h2>Результаты поиска</h2>
+    <a class="btn" asp-action="ListView">Вернуться обратно</a>
+    </div>
+
+    @if (Model.Any())
+    {
+        <div class="blocks">
+            @foreach (var item in Model)
+            {
+                <div class="block">
+                    <div class="block-content">
+                        <h5>@item.Name</h5>
+
+                        <p style="font-size: 18px;" class="price">@item.Price</p>
+
+                        <div class="button-container">
+                            @if (User.IsInRole("ContentManager"))
+
+                            {
+                                <a asp-action="EditServiceView"
+                                   asp-controller="ContentManager"
+                                   asp-route-id="@item.ServiceId"
+                                   asp-route-urlReturn="@pathAndQuery"
+                                   class="btn">
+                                    Изменить
+                                </a>
+                                <a asp-action="DeleteService"
+                                   asp-controller="ContentManager"
+                                   asp-route-id="@item.ServiceId"
+                                   asp-route-urlReturn="@pathAndQuery"
+                                   class="btn" style="margin-top:5px;">
+                                    Удалить
+                                </a>
+                            }
+                            else
+                            {
+                                <button type="submit" class="book-button"
+                                        data-bs-target="#openModalList-@item.ServiceId">
+                                    Записаться
+                                </button>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+    }
+    else
+    {
+        <p>По вашему запросу ничего не найдено.</p>
+    }
+
+    <!-- Здесь можно добавить другие элементы или скрипты, если необходимо -->
+      <!-- Модальное окно -->
+     <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title btn_header" id="exampleModalLabel">Записаться на прием</h4>
+
+                    <img class="close" src="~/images/close.png" style="cursor: pointer" />
+
+                </div>
+                <div class="modal-body" style="color: black">
+
+
+
+
+                    <form  method="post" asp-controller="Service" asp-action="Create" id="contactForm">
+
+
+                        <div class="mb-3">
+
+                        <input type="text" class="form-control" id="name" name="Name" placeholder="Введите ваше имя" required>
+
+                        </div>
+                        <div class="mb-3">
+                        <input type="text" class="form-control phone" id="phone" name="Phone" placeholder="Ваш телефон +7(999)999-99-99" required>
+                        </div>
+
+                        <div class="mb-3">
+                        <textarea class="form-control" id="area" rows="3" name="Symptoms" placeholder="Опишите симптомы"></textarea>
+                        </div>
+
+
+                        <button type="submit" class="btn">Заказать звонок</button>
+
+                    </form> 
+
+                
+            </div>
+            </div>
+        </div>
+    </div> 
+ 
+
+
+ <font color="black;">
+
+
+    <!-- Модальное окно с сообщением -->
+    <div id="thankYouModal" class="modal">
+        <div class="modal-content">
+         
+            <img class="thank-you-close" src="~/images/close.png" style="cursor: pointer" />
+            <h5 style="text-align: center;">Спасибо за вашу заявку! Мы свяжемся с вами в ближайшее время.</h5>
+
+        </div>
+    </div>
+</font>  
+
+
+ 
+
+
+   <script>
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Получаем элементы
+        var openModalButtons = document.querySelectorAll(".book-button");
+        var closeModalButtons = document.querySelectorAll(".close");
+        var modal = document.getElementById("modal");
+        var thankYouModal = document.getElementById("thankYouModal");
+        var form = document.getElementById("contactForm");
+        var area = document.getElementById("area");
+        var name = document.getElementById("name");
+        var phone = document.getElementById("phone");
+        var thankYouCloseBtn = document.querySelector(".thank-you-close");
+
+        // Функция для открытия модального окна
+        function openModal() {
+            modal.style.display = "block";
+            name.value = ""; // Очищаем поле имени
+            phone.value = ""; // Очищаем поле телефона
+            area.value = "";
+        }
+
+        // Функция для закрытия модального окна
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        // Обработчик события для кнопок "Записаться"
+        openModalButtons.forEach(function (button) {
+            button.addEventListener("click", openModal);
+        });
+
+        // Обработчик события для кнопок "Закрыть"
+        closeModalButtons.forEach(function (button) {
+            button.addEventListener("click", closeModal);
+        });
+
+        // Закрываем модальное окно при клике вне его
+        window.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Валидация и обработка формы
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+
+            // Проверяем введенные данные
+            var enteredName = name.value.trim();
+            var enteredPhone = phone.value.trim();
+
+            if (enteredName === "" || enteredPhone === "") {
+                alert("Пожалуйста, заполните все поля");
+            } else {
+                // Здесь можно добавить код для отправки данных на сервер или выполнения других действий
+                // После успешной отправки формы, закрываем текущее модальное окно и открываем модальное окно благодарности
+                closeModal();
+                thankYouModal.style.display = "block";
+            }
+        });
+
+        // Закрываем модальное окно благодарности при клике на "закрыть"
+        thankYouCloseBtn.addEventListener("click", function () {
+            thankYouModal.style.display = "none";
+        });
+
+        // Закрываем модальное окно благодарности, если пользователь кликнул вне его
+        window.addEventListener("click", function (event) {
+            if (event.target === thankYouModal) {
+                thankYouModal.style.display = "none";
+            }
+        });
+    });
+
+      
+
+    </script> 
+</body>
+</html>

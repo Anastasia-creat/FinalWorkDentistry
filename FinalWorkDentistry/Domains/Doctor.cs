@@ -23,9 +23,6 @@ namespace FinalWorkDentistry.Domains
         public string ImageUrl { get; set; }
 
 
-      // public virtual ICollection<OrderRecord> OrderRecordsForDoctors { get; set; }
-
-
 
     }
 }

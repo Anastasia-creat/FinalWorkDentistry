@@ -8,132 +8,49 @@
 
 
 
-<style>
-    /* Стили для чата */
-
-    /* Стили для чата */
-    /* Стили для кнопки чата */
-    .chat-button {
-        position: fixed;
-        bottom: 20px; /* Расположение кнопки снизу */
-        right: 20px; /* Расположение кнопки справа */
-        z-index: 9999; /* Чтобы кнопка была поверх всех других элементов */
-        /*  background-color: #007bff; */ /* Цвет фона кнопки */
-
-        background-color: #9ACEEB;
-        color: white; /* Цвет текста кнопки */
-        border: none;
-        border-radius: 50%; /* Для круглой формы кнопки */
-        width: 50px;
-        height: 50px;
-        font-size: 24px;
-        cursor: pointer;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
-    }
-
-    .chat-header {
-        background-color: #007bff; /* Синий цвет фона */
-        color: white; /* Белый цвет текста */
-        padding: 10px;
-        font-weight: bold;
-    }
-
-        .chat-header h3 {
-            margin: 0;
-        }
-
-        .chat-header p {
-            margin: 5px 0;
-        }
-
-
-
-    .chat-message-input {
-        background-color: #ffffff;
-        border: 1px solid #cccccc;
-        border-radius: 5px;
-        padding: 10px;
-        margin-top: 10px;
-    }
-
-        .chat-message-input input[type="text"] {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-
-
-        .chat-message-input input[type="text"] {
-            width: calc(100% - 20px);
-            border: none;
-            outline: none;
-        }
-
-            .chat-message-input input[type="text"]::placeholder {
-                color: #cccccc;
-            }
-
-
-    .main {
-        position: fixed;
-        bottom: 20px; /* Указываете желаемый отступ от нижнего края страницы */
-        left: 1100px; /* Можете также указать отступ от правого края страницы */
-        /* Дополнительные стили */
-        width: 350px; /* Ширина контейнера чата */
-        height: 700px; /* Высота контейнера чата */
-        background-color: #f0f0f0; /* Цвет фона контейнера */
-
-        border-radius: 12px; /* Закругление углов */
-    }
-
-</style>
 
 
 @if (DisplayChat)
 {
-    <div class="main d-flex fixed-bottom" style="overflow-y: auto; overflow-x: hidden;">
+    <div class="main d-flex"  id="chat-container">
         <div class="wrapper shadow-sm rounded" style="width:350px">
             <!-- Шапка чата -->
-            <div class="chat-header" style="background-color: #B0C4DE; color: #fff; padding: 10px;">
-                <button type="button" style="position: absolute; top: 5px; right: 5px; background: none; border: none; color: white; font-size: 18px; cursor: pointer;"
+            <div class="chat-header">
+                <button class="chat_btn" type="button" 
                         @onclick="() => { CloseChat(); ClearChat(); }">
                     &times;
                 </button>
-                <h5>Чат на сайте</h5>
+                <h5>Чат с менеджером</h5>
                 <p>Онлайн</p>
-
             </div>
 
             <!-- Место для сообщений -->
             <div class="chat-messages">
                 @foreach (var userMessage in userMessages)
                 {
-
                     <div class="row @(userMessage.CurrentUser ? "justify-content-end" : "")">
                         <div class="col">
-                            <div class="shadow p-3 mb-3 bg-light rounded @(userMessage.CurrentUser ? "text-end" : "")" style="display: inline-block; max-width: 90%;
-                                        word-wrap: break-word; color: black; margin: 10px 5px 0 0 ">
+                            <div class="shadow p-3 mb-3 bg-light rounded @(userMessage.CurrentUser ? "text-end" : "")" style="display: inline-block; max-width: 90%; word-wrap: break-word; color: black; margin: 10px 5px 0 0 ">
                                 <p class="card-text" style="margin: 10px 0; font-size: 16px; text-align: left;">@userMessage.Message</p>
                                 <span class="small text-muted" style="display: block;">@userMessage.DateSent.ToString("HH:mm |  dd MMM")</span>
                             </div>
                         </div>
                     </div>
-
-
                 }
             </div>
         </div>
 
         <!-- Поле для ввода сообщения -->
-        <div class="chat-message-input" style="position: absolute; bottom: 10px; left: 10px; right: 10px;">
+        <div class="chat-message-input">
             <input @bind="messageInput" type="text" placeholder="Введите текст" style="width: calc(100% - 40px); border: none; outline: none; background-color: rgba(255, 255, 255, 0.8); padding: 10px;">
-            <button type="button" @onclick="Send" style="background-color: transparent; border: none; cursor: pointer; padding: 10px;">
+            <button class="message-input_btn" type="button" @onclick="Send">
                 &#10149;
             </button>
         </div>
     </div>
 }
 
-<button class="chat-button" style="float:right;" type="button" @onclick="OpenChat">
+<button class="chat-button" type="button" @onclick="OpenChat">
     <span class="material-symbols-outlined">
         forum
     </span>
@@ -144,11 +61,8 @@
 
 
 
+
 @code {
-
-    // public string Chat = "none;";
-
-    //public string ModalClass = "";
 
     public bool DisplayChat { get; set; } = false;
 

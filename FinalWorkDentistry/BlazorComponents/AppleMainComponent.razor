@@ -11,130 +11,18 @@
 
 <div class="wrappermain" style="min-width:100%; margin:0 auto; margin-bottom: 200px;">
 
-    <style>
-
-        .container-with-Zub {
-            display: flex;
-            margin-top: 120px; /* Измените значение на нужный вам отступ */
-            margin-bottom: 120px;
-        }
-
-        .left-content {
-            flex: 2;
-        }
-
-        .right-content {
-            flex: 1;
-            text-align: right; /* Помещает изображение вправо */
-        }
-
-
-
-
-
-
-        /* .card-container {
-            display: flex;
-            justify-content: center; 
-        }
-
-        .card {
-            color: #3f555a;
-            display: flex;
-            align-items: center;
-            background-image: url('/images/анестезия.png');
-            background-size: cover;
-        }
-
-        .card-body {
-            flex-grow: 1; 
-        }
-
-        .card-text {
-            text-align: left; 
-            margin: 0; 
-        } */
-
-
-
-        .card-container {
-            display: flex;
-            font-size: 22px;
-            margin-bottom: 200px;
-            flex-wrap: wrap;
-            justify-content: space-between
-        }
-
-        .card {
-            display: flex;
-            margin-right: 10px; 
-         
-            border-radius: 35px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
-            overflow: hidden;
-           
-         
-            background-size: cover;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
-            color: black;
-        
-        }
-
-        h2 {
-            margin: 0; /* Убираем внешние отступы у заголовка */
-        }
-
-        .card-content {
-            flex-grow: 1; /* Растягиваем контент на всю доступную ширину */
-            padding: 20px; /* Отступы внутри карточки */
-            word-wrap: break-word;
-          
-            
-        }
-
-        .card{
-            color: black;
-            display: flex;
-            align-items: flex-start;
-        }
-
-            .card-logo {
-
-               
-
-                text-align: center;
-                margin-top: 5px;
-                margin-bottom: 0;
-            }
-
-            .card-body{
-            word-wrap: break-word;
-            margin-top: 0;
-            }
-
-            .card-text{
-            width: 300px;
-            }
-
-        .image {
-            width: 200px; /* Ширина изображения */
-            height: 200px; /* Высота изображения */
-            background-size: cover; /* Растягиваем изображение на всю доступную площадь */
-            background-position: center; /* Центрируем изображение */
-        }
-
-       
-
-    </style>
+   
 
 
 
     
-<Carousel DataSource="items"
-          HideArrows HideIndicators SlideShow AutoPlay Loop Interval="2500"
+ <Carousel DataSource="items"
+          HideArrows HideIndicators SlideShow AutoPlay Loop Interval="2000"
           style="width:100%; height:500px; margin: 0 auto; margin-bottom:20px; margin-top: 25px">
 </Carousel>
+ 
 
+ 
 
      <div class="container-with-Zub">
          <div class="left-content">
@@ -217,6 +105,16 @@
     </div>
 
 
+    <h2 style="text-align: center; font-size: 30px; padding-bottom:50px; width: 100%;">Посмотрите видео и больше узнайте о нашей клинике</h2>
+
+    <div id="video-container">
+        <video id="fullscreen-video" controls >
+            <source src="/images/Стоматология.mp4" type="video/mp4">
+            Ваш браузер не поддерживает тег video.
+        </video>
+    </div>
+
+
   
 
  <BlazorMessageComponent
@@ -241,8 +139,15 @@
     
       new {label="", content="",
       image="/images/womantext.png"},
-    
-  
      
   };
+
+
+
+  //   dynamic[] items = new dynamic[]{
+  //     new {label="First Label", content="Additional Information", image="/images/deti.png"},
+  //     new {label="Second Label", content="Additional Information", image="/images/last.png"},
+  //     new {label="Third Label", content="Additional Information", image="/images/1s.png"},
+  //     new {label="Forth Label", content="Additional Information", image="/images/womantext.png"},
+  // };
 }

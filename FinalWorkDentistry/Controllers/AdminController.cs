@@ -31,21 +31,11 @@ namespace FinalWorkDentistry.Controllers
 
         public IActionResult ListRequest()
         {
-          //   var category = _repositoryCategories.FindByName(categoryName);
 
           var query = _repositoryRequest.GetList();
 
          var model = query.OrderBy(x => x.RequestId)
-                                   //   .Take(_serviceQuantityPerPage)
                                    .Select(e => e.Adapt<RequestModel>());
-
-            //  var totalServicesQuantity = query.Count();
-
-            //var model = new ReviewsModel
-            //{
-            //    ReviewForPage = servicesSample
-
-            //};
 
             return View(model);
         }
@@ -86,11 +76,9 @@ namespace FinalWorkDentistry.Controllers
 
         public IActionResult Create() => View();
 
-
         [HttpPost]
         public async Task<IActionResult> Create(string name)
         {
-
             if(!string.IsNullOrEmpty(name))
             {
                 IdentityResult result = await _roleManager.CreateAsync(new IdentityRole(name));
@@ -106,7 +94,6 @@ namespace FinalWorkDentistry.Controllers
                     }
                 }
             }
-
             return View(name);
         }
 
@@ -123,15 +110,11 @@ namespace FinalWorkDentistry.Controllers
         }
 
         public IActionResult UserList() => View(_userManager.Users.ToList());
-
-
         public async  Task<IActionResult> Edit(string userId)
         {
-            //получаем пользователя
             ApplicationUser user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                //получаем список ролей пользователя
                 var userRoles = await _userManager.GetRolesAsync(user);
                 var allRoles = _roleManager.Roles.ToList();
                 var model = new ChangeRoleViewModel
@@ -146,30 +129,20 @@ namespace FinalWorkDentistry.Controllers
             return NotFound();
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
-            // получаем пользователя
             ApplicationUser user = await _userManager.FindByIdAsync(userId);
             if (user != null)
             {
-                // получем список ролей пользователя
                 var userRoles = await _userManager.GetRolesAsync(user);
-                // получаем все роли
                 var allRoles = _roleManager.Roles.ToList();
-                // получаем список ролей, которые были добавлены
                 var addedRoles = roles.Except(userRoles);
-                // получаем роли, которые были удалены
                 var removedRoles = userRoles.Except(roles);
-
                 await _userManager.AddToRolesAsync(user, addedRoles);
-
                 await _userManager.RemoveFromRolesAsync(user, removedRoles);
-
                 return RedirectToAction("UserList");
             }
-
             return NotFound();
         }
     }

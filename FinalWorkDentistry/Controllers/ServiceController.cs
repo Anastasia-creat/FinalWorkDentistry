@@ -9,6 +9,7 @@ using FinalWorkDentistry.DataAccessLayer;
 using FinalWorkDentistry.Abstract;
 using FinalWorkDentistry.Domains;
 using FinalWorkDentistry.Models;
+using static System.Reflection.Metadata.BlobBuilder;
 
 
 namespace FinalWorkDentistry.Controllers
@@ -30,31 +31,24 @@ namespace FinalWorkDentistry.Controllers
             _repositoryCategories = repositoryCategories;
             db = context;
         }
-
-       
-
-        public IActionResult ListView(string categoryName, int page = 1)
+      public IActionResult ListView(string categoryName, string searchString, int page = 1)
         {
             var category = _repositoryCategories
                .FindByName(categoryName);
 
             var query = _repositoryServices
                .GetList()
-               .Where(p =>
-                   category == null ||
-                   p.ServiceCategory.CategoryServiceId == category.CategoryServiceId);
+              .Where(p =>
+        (category == null || p.ServiceCategory.CategoryServiceId == category.CategoryServiceId) &&
+        (string.IsNullOrEmpty(searchString) || p.Name.Contains(searchString)));
 
-            // добавляем механизм пагинации
             var servicesSample = query
                 .OrderBy(x => x.ServiceId)
                 .Skip((page - 1) * _serviceQuantityPerPage)
                 .Take(_serviceQuantityPerPage)
                 .Select(e => new ServicesBriefModel(e));
-                //.Select(e => e.Adapt<ServicesBriefModel>(e));
 
             int totalServicesQuantity = query.Count();
-
-
 
             int pagesQuantity = (int)
                 Math.Ceiling(
@@ -67,20 +61,33 @@ namespace FinalWorkDentistry.Controllers
                 ServicesForPage = servicesSample,
                 ActivePage = page,
                 PagesQuantity = pagesQuantity,
-                CategoryName = categoryName
+                CategoryName = categoryName,
+                SearchString = searchString
 
             };
 
-          
-
             return View(model);
-
-
-
-
         }
 
-       
+        public IActionResult Search(string searchString)
+        {
+            // Получаем все книги из базы данных
+            var service= _repositoryServices.GetList();
+
+            // Если поисковая строка не пустая
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // Фильтруем книги по названию, автору и жанру
+                searchString = searchString.ToLower(); // Привести строку поиска к нижнему регистру для нечувствительности к регистру
+                service = service.Where(b =>
+                    b.Name.ToLower().Contains(searchString) ||
+                    b.ServiceCategory.Name.ToLower().Contains(searchString)).ToList();
+            }
+
+            // Передаем отфильтрованные книги в представление для отображения
+            return View(service);
+        }
+
 
         public IActionResult ServicesDetailsView(long id)
         {
@@ -119,30 +126,7 @@ namespace FinalWorkDentistry.Controllers
             return View(model);
         }
 
-        //private readonly string accountSid = "AC13908ea809d7898a34918c3cdf83b5fd";
-        //private readonly string authToken = "d0f4cbe218c57b33dee08bb159ddd415";
-        //private readonly string fromPhoneNumber = "+18148502119";
-
-        //[HttpPost("send-confirmation-sms")]
-        //public async Task<IActionResult> SendConfirmationSmsAsync([FromBody] SmsRequestModel request)
-        //{
-        //    try
-        //    {
-        //        TwilioClient.Init(accountSid, authToken);
-
-        //        var message = await MessageResource.CreateAsync(
-        //            body: $"Your confirmation code is: {request.ConfirmationCode}",
-        //            from: new Twilio.Types.PhoneNumber(fromPhoneNumber),
-        //            to: new Twilio.Types.PhoneNumber(request.ToPhoneNumber)
-        //        );
-
-        //        return Ok(new { MessageSid = message.Sid });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(new { Error = ex.Message });
-        //    }
-        //}
+      
     }
 
 }

@@ -3,25 +3,18 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@* <ul class="navbar-nav"> *@
+
 @if (SignInManager.IsSignedIn(User))
-{
-   
+{ 
         <a  class="navbar-brand text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"></a>
-  
-  
+ 
         <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("IndexMain", "Blazor", new { area = "" })">
             <button  type="submit" class=" btn">Выйти</button>
         </form>
- 
 }
 else
 {
-  @*   <li class="nav-item">
-        <a class="nav-link" style="color:whitesmoke; font-size: 20px;" asp-area="Identity" asp-page="/Account/Register">Регистрация</a>
-    </li> *@
-   @*  <li class="nav-item"> *@
             <a class="btn"  asp-area="Identity" asp-page="/Account/Login">Войти</a>
-    @* </li> *@
+ 
 }
-@* </ul> *@
+

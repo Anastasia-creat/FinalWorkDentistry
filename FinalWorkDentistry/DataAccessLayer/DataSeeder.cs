@@ -20,13 +20,8 @@ namespace FinalWorkDentistry.DataAccessLayer
             var doctorRepository = provider
                 .GetRequiredService<IRepository<Doctor>>();
 
-
             var reviewRepository = provider
               .GetRequiredService<IRepository<Reviews>>();
-
-
-
-            //отдельные 2 категории на блейзор
             var categoryUslugiRepository = provider
                 .GetRequiredService<IRepository<CategoryService>>();
 
@@ -40,6 +35,32 @@ namespace FinalWorkDentistry.DataAccessLayer
             var filesService = new DirectoryInfo("ClinicJson")
                 .GetFiles("*.json");
 
+            foreach (var fi in filesService)
+            {
+                string categoryName = Path.GetFileName(fi.FullName);
+                categoryName = Path.GetFileNameWithoutExtension(categoryName);
+
+                var categoryUslugi = new CategoryService { Name = categoryName };
+                categoryUslugiRepository.Create(categoryUslugi);
+
+                string jsonText = File.ReadAllText(fi.FullName);
+
+                var services = JsonConvert
+                    .DeserializeObject<List<ServicesModel>>(jsonText);
+
+                foreach (var model in services)
+                {
+                    var product = new Service
+                    {
+                        Name = model.Name,
+                        Price = model.Price,
+                        ServiceCategory = categoryUslugi
+                      
+                    };
+
+                    serviceRepository.Create(product);
+                }
+            }
 
 
             if (doctorRepository.GetList().Count() > 0)
@@ -48,68 +69,11 @@ namespace FinalWorkDentistry.DataAccessLayer
             var filesDoctor = new DirectoryInfo("DoctorsJson")
                 .GetFiles("*.json");
 
-
-
-            if(reviewRepository.GetList().Count() > 0) return;
-            var filesReviews = new DirectoryInfo("ReviewsJson").GetFiles("*json");
-
-            foreach (var fi in filesService)
-            {
-                string categoryName = Path.GetFileName(fi.FullName);
-                categoryName = Path.GetFileNameWithoutExtension(categoryName);
-
-               
-
-                ////new uslugi blazor
-                var categoryUslugi = new CategoryService { Name = categoryName };
-                categoryUslugiRepository.Create(categoryUslugi);
-                //------------------------------------------------
-
-                string jsonText = File.ReadAllText(fi.FullName);
-
-                var services = JsonConvert
-                    .DeserializeObject<List<ServicesModel>>(jsonText);
-
-                //var doctors = JsonConvert
-                // .DeserializeObject<List<DoctorModel>>(jsonText);
-
-                foreach (var model in services)
-                {
-                    var product = new Service
-                    {
-                        //  Description = model.Description,
-                        Name = model.Name,
-                        //  ImageUrl = model.ImageUrl,
-                        Price = model.Price,
-                       
-
-                        ServiceCategory = categoryUslugi
-                      
-                    };
-
-                    serviceRepository.Create(product);
-                }
-
-                //foreach (var model in doctors)
-                //{
-                //    var product = new Doctor
-                //    {
-                //        Name = model.Name,
-                //        Description = model.Description,
-                //        DoctorCategory = category,
-                //        ImageUrl = model.ImageUrl
-                //    };
-                //}
-            }
-
             foreach (var fi in filesDoctor)
             {
                 string categoryNameDoctor = Path.GetFileName(fi.FullName);
                 categoryNameDoctor = Path.GetFileNameWithoutExtension(categoryNameDoctor);
 
-              
-
-                //new medic blazor
                 var categoryMedic = new CategoryDoctor { Name = categoryNameDoctor };
                 categoryMedicRepository.Create(categoryMedic);
 
@@ -127,11 +91,7 @@ namespace FinalWorkDentistry.DataAccessLayer
                         Job = model.Job,
                         Name = model.Name,
                         ImageUrl = model.ImageUrl,
-                       
-
                         DoctorCategory = categoryMedic
-
-
                     };
 
                     doctorRepository.Create(doctor);
@@ -139,17 +99,11 @@ namespace FinalWorkDentistry.DataAccessLayer
             }
 
 
-
+            if (reviewRepository.GetList().Count() > 0) return;
+            var filesReviews = new DirectoryInfo("ReviewsJson").GetFiles("*json");
             foreach (var fi in filesReviews)
             {
-               // string categoryNameDoctor = Path.GetFileName(fi.FullName);
-               // categoryNameDoctor = Path.GetFileNameWithoutExtension(categoryNameDoctor);
-
-
-
-                //new medic blazor
-              //  var categoryMedic = new CategoryDoctor { Name = categoryNameDoctor };
-              //  categoryMedicRepository.Create(categoryMedic);
+               
 
 
                 string jsonText = File.ReadAllText(fi.FullName);
@@ -172,41 +126,7 @@ namespace FinalWorkDentistry.DataAccessLayer
                     reviewRepository.Create(review);
                 }
             }
-            //foreach (var fi in filesDoctor)
-            //{
-            //    string categoryNameDoctor = Path.GetFileName(fi.FullName);
-            //    categoryNameDoctor = Path.GetFileNameWithoutExtension(categoryNameDoctor);
-
-            //    //var category = new Category { Name = categoryNameDoctor };
-            //    //categoryRepository.Create(category);
-
-            //    //new medic blazor
-            //    var categoryMedic = new CategoryMedic { Name = categoryNameDoctor };
-            //    categoryMedicRepository.Create(categoryMedic);
-
-
-            //    string jsonText = File.ReadAllText(fi.FullName);
-            //    var doctors = JsonConvert
-            //        .DeserializeObject<List<DoctorModel>>(jsonText);
-
-            //    foreach (var model in doctors)
-            //    {
-            //        var doctor = new Doctor
-            //        {
-
-            //            Description = model.Description,
-            //            Name = model.Name,
-            //            ImageUrl = model.ImageUrl,
-            //           // DoctorCategory = category,
-
-            //            MedicCategory = categoryMedic
-
-
-            //        };
-
-            //        doctorRepository.Create(doctor);
-            //    }
-            //}
+           
         }
 
         public static void SeedUsers(UserManager<ApplicationUser> userManager)

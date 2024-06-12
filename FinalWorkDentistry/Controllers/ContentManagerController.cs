@@ -35,7 +35,7 @@ namespace FinalWorkDentistry.Controllers
 
 
 
-        //Удаление отзыва
+ 
         public IActionResult DeleteReview(long id)
         {
             var rev = _repositoryReviews.GetList();
@@ -61,13 +61,11 @@ namespace FinalWorkDentistry.Controllers
             var categories = _repositoryCategoryDoc.GetList();
             return View(categories);
         }
-
         public IActionResult AddCategoryDoctor()
         {
             var category = new CategoryDoctor();
             return View("EditCategoryDoctor", category);
         }
-
         public IActionResult DeleteCategoryDoctor(long id)
         {
             var category = _repositoryCategoryDoc.ReadWithRelations(id);
@@ -83,13 +81,11 @@ namespace FinalWorkDentistry.Controllers
 
             return RedirectToAction("Index");
         }
-
         public IActionResult EditCategoryDoctor(long id)
         {
             var category = _repositoryCategoryDoc.Read(id);
             return View(category);
         }
-
         [HttpPost]
         public IActionResult EditCategoryDoctor(CategoryDoctor model)
         {
@@ -105,10 +101,8 @@ namespace FinalWorkDentistry.Controllers
                 }
                 return RedirectToAction("Index");
             }
-
             return View(model);
         }
-
         //Врачи---------------------------------------------------------------------
 
 
@@ -122,7 +116,6 @@ namespace FinalWorkDentistry.Controllers
 
             return View("EditDoctorView", model);
         }
-
         public IActionResult EditDoctorView(long id, string urlReturn)
         {
             var entity = _repositoryDoctors.Read(id);
@@ -136,7 +129,6 @@ namespace FinalWorkDentistry.Controllers
 
             return View(model);
         }
-
         [HttpPost]
         public IActionResult EditDoctorView(EditDoctorsModel editModel)
         {
@@ -160,8 +152,6 @@ namespace FinalWorkDentistry.Controllers
             }
             return View(editModel);
         }
-
-
         public IActionResult DeleteDoctor(long id)
         {
             var doc = _repositoryDoctors.GetList();
@@ -170,13 +160,9 @@ namespace FinalWorkDentistry.Controllers
             {
                 _repositoryDoctors.Delete(id);
             }
-
-
             return RedirectToAction("ListView", "Doctor");
 
         }
-
-
 
         //---------------------------------------------------------------------------
         public IActionResult AddService()
