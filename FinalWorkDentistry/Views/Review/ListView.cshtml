@@ -1,28 +1,22 @@
-﻿@model FinalWorkDentistry.Models.ReviewsModel;
+﻿@model FinalWorkDentistry.Models.ReviewsModel
 
 @{
-
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-
     string pathAndQuery = Context.Request.Path + Context.Request.QueryString;
 }
 
 <h1 style="text-align: left;">@ViewData["Отзывы"]</h1>
 
-
 <style>
     .container_form-review {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between; /* Распределяем пространство между элементами */
-        align-items: center; /* Выравниваем элементы по вертикали */
+        justify-content: space-between;
+        align-items: center;
     }
 
     .form-container {
-        width: 60%; /* Уменьшаем ширину формы для учёта изображения */
-        /*  padding-left: 15px; */
-
+        width: 60%;
         background-color: #6F8AA4;
         border-radius: 5px;
     }
@@ -54,32 +48,20 @@
     }
 
     .image-container {
-        width: 35%; /* Устанавливаем ширину контейнера с изображением */
+        width: 35%;
     }
 
         .image-container img {
-            width: 100%; /* Растягиваем изображение на всю ширину контейнера */
+            width: 100%;
             border-radius: 5px;
         }
 </style>
 
-
-
-@* <p>
-    <a asp-action="Create">Create New</a>
-</p> *@
 <table class="table">
     <thead>
         <tr>
-            @*   <th>
-            @Html.DisplayNameFor(model => model.ReviewId)
-            </th> *@
-            <th>
-                @Html.DisplayNameFor(model => model.NameReview)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Text)
-            </th>
+            <th>Имя</th>
+            <th>Отзыв</th>
             <th></th>
         </tr>
     </thead>
@@ -87,59 +69,39 @@
         @foreach (var item in Model.ReviewForPage)
         {
             <tr>
-                @*  <td>
-            @Html.DisplayFor(modelItem => item.ReviewId)
-            </td> *@
-                <td>
-                    @Html.DisplayFor(modelItem => item.NameReview)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Text)
-                </td>
-
+                <td>@item.NameReview</td>
+                <td>@item.Text</td>
                 @if (User.IsInRole("ContentManager"))
                 {
-                    <a asp-action="DeleteReview"
-                       asp-controller="ContentManager"
-                       asp-route-id="@item.ReviewId"
-                       asp-route-urlReturn="@pathAndQuery"
-                       class="btn">
-                        Удалить отзыв
-                    </a>
-  
-                } 
+                    <td>
+                        <a asp-action="DeleteReview"
+                           asp-controller="ContentManager"
+                           asp-route-id="@item.ReviewId"
+                           asp-route-urlReturn="@pathAndQuery"
+                           class="btn">
+                            Удалить отзыв
+                        </a>
+                    </td>
+                }
             </tr>
         }
     </tbody>
 </table>
 
-
-
-
-
-
-<div class="container_form-review" id="reviews" style="background-color: #6F8AA4;">
+<div class="container_form-review" id="reviews">
     <div class="form-container">
-        <!-- Форма для отправки отзыва -->
         <h2 style="padding-bottom: 20px; padding-left:10px;">Оставьте свой отзыв</h2>
         @using (Html.BeginForm("SubmitReview", "Review", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
-            @*   <label class="marg" for="phone">Телефон:</label>
-
-        <br>
-        <input type="tel" id="phone" name="phone" required> *@
-
             <br>
             <label class="marg" for="name">Введите ваше имя:</label>
-
             <br>
             <input type="text" id="name" name="NameReview" required>
 
             <br>
             <label class="marg" for="message">Текст отзыва:</label>
-
             <br>
             <textarea id="message" name="Text" required></textarea>
 
@@ -148,7 +110,6 @@
         }
     </div>
     <div class="image-container">
-        <!-- Картинка -->
         <img src="/images/char.png" alt="Картинка">
     </div>
 </div>

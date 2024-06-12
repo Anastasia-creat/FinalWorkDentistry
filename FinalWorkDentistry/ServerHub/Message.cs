@@ -8,8 +8,8 @@ namespace FinalWorkDentistry.ServerHub
     
     public static class Message 
     {
-       public static string Receive = "ReceiveMessage";
-       public static string Register = "Register";
-       public static string Send = "Send";
+        public static string Receive = "ReceiveMessage";
+        public static string Register = "Register";
+        public static string Send = "Send";
     }
 }

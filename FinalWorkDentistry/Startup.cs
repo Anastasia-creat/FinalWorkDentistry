@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
-using FinalWorkDentistry.BlazorServices;
+
 
 
 namespace FinalWorkDentistry
@@ -94,8 +94,7 @@ namespace FinalWorkDentistry
 
             services.AddSignalR();
 
-            services.AddTransient<BlazorService>();
-            services.AddTransient<BlazorDoctors>();
+           
 
 
             services.AddSmart();
