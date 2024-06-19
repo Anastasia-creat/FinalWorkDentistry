@@ -93,6 +93,13 @@
             background-color: #536D86;
             color: #3f555a;
         }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+            gap: 5px; /* Устанавливаем расстояние между кнопками */
+            margin-top: auto;
+        }
     </style>
 </head>
 
@@ -115,7 +122,8 @@
                            asp-controller="ContentManager"
                            asp-route-id="@item.ServiceId"
                            asp-route-urlReturn="@pathAndQuery"
-                           class="btn">
+                           class="btn"
+                        >
                             Изменить
                         </a>
                         <a asp-action="DeleteService"

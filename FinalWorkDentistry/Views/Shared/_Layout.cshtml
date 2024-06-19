@@ -53,6 +53,8 @@
                         <a class="navbar-brand btn_header " asp-controller="Doctor" asp-action="ListView">Специалисты</a>
                         <a  class="navbar-brand btn_header" asp-controller="Review" asp-action="ListView">Отзывы</a>
 
+                        <a  class="navbar-brand btn_header" asp-controller="Blazor" asp-action="Questions">Вопросы</a>
+
 
                         @if (User.IsInRole("Administrator"))
                         {
@@ -63,7 +65,7 @@
                         @if (User.IsInRole("ContentManager"))
                         {
 
-                            <a class="navbar-brand btn_header" asp-controller="ContentManager" asp-action="Index">Управление контентом</a>
+                            <a class="navbar-brand btn_header" asp-controller="ContentManager" asp-action="Index">Управление</a>
                             
                           
                         }

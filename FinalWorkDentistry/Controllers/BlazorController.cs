@@ -18,9 +18,12 @@ namespace FinalWorkDentistry.Controllers
             return View();
         }
 
-       
 
 
+        public IActionResult Questions()
+        {
+            return View();
+        }
 
     }
 }

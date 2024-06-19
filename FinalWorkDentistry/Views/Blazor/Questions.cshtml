@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @{
+        ViewData["Title"] = "Часто задаваемые вопросы";
+    }
+
+    <h1 style="text-align: center">@ViewData["Title"]</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Часто задаваемые вопросы</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+          /*   background-color: #f0f0f0; */
+            margin: 0;
+            padding: 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 20px auto;
+           /*  background-color: #fff; */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-item {
+            margin-bottom: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .faq-item:hover {
+                background-color: #e0e0e0;
+            }
+
+        .question {
+            padding: 15px;
+            margin: 0;
+            font-size: 20px;
+            color: #6F8AA4;
+            background-color: whitesmoke;
+            cursor: pointer;
+        }
+
+        .answer {
+            padding: 15px;
+            background-color: #fff;
+            display: none;
+            overflow: hidden;
+            color: #6F8AA4;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .active .question {
+            background-color: #6F8AA4;
+            color: #fff;
+        }
+
+        .active .answer {
+            display: block;
+            max-height: 1000px;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="faq-container">
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Какие услуги вы предоставляете?</h2>
+            <div class="answer">
+                <p>Мы предлагаем широкий спектр стоматологических услуг, включая профессиональную гигиену, лечение зубов и десен, ортодонтию и многое другое.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Как мне записаться на прием?</h2>
+            <div class="answer">
+                <p>Записаться на прием можно через нашу онлайн-форму на сайте или позвонив по телефону. Мы также принимаем пациентов без предварительной записи в случае срочных случаев.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Какие методы оплаты вы принимаете?</h2>
+            <div class="answer">
+                <p>Мы принимаем наличные, банковские карты и электронные платежи.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Как долго длится лечение зубов?</h2>
+            <div class="answer">
+                <p>Длительность лечения зависит от сложности случая. Простые процедуры могут занять от нескольких минут до нескольких часов. Сложные кейсы могут потребовать нескольких приемов.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Что делать в случае острой боли в зубе?</h2>
+            <div class="answer">
+                <p>Если у вас острая боль в зубе, рекомендуем немедленно связаться с нашей клиникой для записи на срочный прием. При необходимости мы можем провести экстренное лечение.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Как часто нужно посещать стоматолога на профилактический осмотр?</h2>
+            <div class="answer">
+                <p>Рекомендуется посещать стоматолога для профилактического осмотра и гигиенической чистки не реже одного раза в полгода. Это поможет предотвратить развитие заболеваний зубов и десен.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <h2 class="question" onclick="toggleAccordion(this)">Какие у вас часы работы?</h2>
+            <div class="answer">
+                <p> Мы работаем с понедельника по пятницу с 9:00 до 20:00. В выходные - выходные дни.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleAccordion(question) {
+            question.parentElement.classList.toggle("active");
+        }
+    </script>
+
+</body>
+</html>

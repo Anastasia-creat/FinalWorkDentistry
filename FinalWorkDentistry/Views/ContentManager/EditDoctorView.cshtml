@@ -1,82 +1,127 @@
 ﻿@model FinalWorkDentistry.Models.EditDoctorsModel
 
 @{
-    ViewData["Title"] = "EditDoctorView";
+    ViewData["Title"] = "Добавление/редактирование специалиста";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <style>
-    .form-group{
+    .form-wrapper {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        color: #6F8AA4; /* Цвет текста */
+    }
+
+    .form-group {
         margin-bottom: 20px;
+    }
+
+    .form-control, .btn {
+        border-radius: 5px;
+    }
+
+    .btn {
+        background-color: #6F8AA4;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #536D86;
+        }
+
+    label {
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #6F8AA4; /* Цвет текста */
+    }
+
+    input[type="file"] {
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    img {
+        border-radius: 10px;
+        margin-top: 10px;
+        max-width: 100%;
+    }
+
+    .text-danger {
+        color: #dc3545;
     }
 </style>
 
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <div class="col-md-6">
+            <div class="form-wrapper">
+                <form asp-action="EditDoctorView" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditDoctorView" enctype="multipart/form-data">
+                    <input type="hidden" name="urlReturn" value="@Model.UrlReturn" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="SelectedCategoryId" class="control-label"></label>
+                        <select asp-for="SelectedCategoryId" asp-items="@Model.ListCategories" class="form-control">
+                            <option>@Model.CategoryDoctor</option>
+                        </select>
+                    </div>
 
-         
+                    <div class="form-group" style="display: none;">
+                        <label asp-for="DoctorId" class="control-label"></label>
+                        <input asp-for="DoctorId" class="form-control" />
+                        <span asp-validation-for="DoctorId" class="text-danger"></span>
+                    </div>
 
-            <input type="hidden" name="urlReturn" value="@Model.UrlReturn" />
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="SelectedCategoryId" class="control-label"></label>
-                <select asp-for="SelectedCategoryId"
-                        asp-items="@Model.ListCategories">
-                    <option>@Model.CategoryDoctor</option>
-                </select>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Job" class="control-label"></label>
+                        <input asp-for="Job" class="form-control" />
+                        <span asp-validation-for="Job" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group" style="display: none;" >
-                <label asp-for="DoctorId" class="control-label"></label>
-                <input asp-for="DoctorId" class="form-control" />
-                <span asp-validation-for="DoctorId" class="text-danger"></span>
-            </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Job" class="control-label"></label>
-                <input asp-for="Job" class="form-control" />
-                <span asp-validation-for="Job" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="display: none;">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-       
-            <div class="form-group">
-                <label style="margin-bottom: 10px;">Загрузите фото</label>
-                <input asp-for="ImageFile" type="file" accept="image/*" />
+                    <div class="form-group" style="display: none;">
+                        <label asp-for="ImageUrl" class="control-label"></label>
+                        <input asp-for="ImageUrl" class="form-control" />
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
 
-                <dd class="">
-                    <img id="ImageView" width="250px" height="350px" 
-                         src="/DoctorsImages/@Model.ImageUrl" />
-                </dd>
+                    <div class="form-group">
+                        <label style="margin-bottom: 10px;">Загрузите фото</label>
+                        <input asp-for="ImageFile" type="file" accept="image/*" class="form-control-file" />
+                        <dd class="">
+                            <img id="ImageView" src="/DoctorsImages/@Model.ImageUrl" />
+                        </dd>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Сохранить" class="btn btn-block" />
+                    </div>
+                </form>
+
+                <div class="form-group">
+                    <a class="btn btn-block" asp-action="ListView" asp-controller="Doctor">Вернуться назад</a>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-<div>
-    <a class="btn"
-       asp-action="ListView"
-       asp-controller="Doctor">Вернуться назад</a>
 </div>
 
 @section Scripts {
@@ -84,32 +129,25 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-     <script>
+    <script>
         $(document).ready(function () {
-            // alert("script work!");
             console.log("script work");
         });
 
         $('#ImageFile').change(function () {
-            // alert("change");
             console.log("change");
             LoadImage(this);
         });
 
         function LoadImage(input) {
             if (input.files && input.files[0]) {
-
                 var reader = new FileReader();
-
                 reader.onload = function (e) {
                     console.log("onload");
-                    $('#ImageView').attr('src', e.target.result)
+                    $('#ImageView').attr('src', e.target.result);
                 }
-
                 reader.readAsDataURL(input.files[0]);
             }
         }
-
-
-    </script> 
+    </script>
 }
