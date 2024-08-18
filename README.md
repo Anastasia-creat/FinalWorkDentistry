@@ -1,5 +1,5 @@
 1. Клонируйте репозиторий на свой компьютер:
-  git clone https://github.com/username/repository.git
+  git clone (https://github.com/Anastasia-creat/FinalWorkDentistry.git)
   cd repository
 
 2. Настройка строки подключения к базе данных
