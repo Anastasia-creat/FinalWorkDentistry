@@ -50,12 +50,20 @@ namespace FinalWorkDentistry
                 options.Cookie.IsEssential = false; //---------
             });
 
-            //  services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
+            // services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
+            // Добавляем DbContext с EnableRetryOnFailure
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"),
+                    sqlOptions => sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5, // Максимальное количество повторных попыток
+                        maxRetryDelay: TimeSpan.FromSeconds(10), // Максимальная задержка между попытками
+                        errorNumbersToAdd: null // Дополнительные коды ошибок для повторения
+                    )
+                )
+            );
 
             services
                 .AddDefaultIdentity<ApplicationUser>(o => {
@@ -79,12 +87,12 @@ namespace FinalWorkDentistry
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/octet-stream" });
             });
 
-                services.AddTransient<IRepository<Service>, ServiceSqlRepository>();
+            services.AddTransient<IRepository<Service>, ServiceSqlRepository>();
 
-         //   services.AddTransient<DoctorModel>();
-         //services.AddTransient<CategoryDoctor>();
+            // services.AddTransient<DoctorModel>();
+            // services.AddTransient<CategoryDoctor>();
 
-         //   services.AddTransient<DoctorBriefModel>();
+            // services.AddTransient<DoctorBriefModel>();
 
             services.AddTransient<IRepository<Doctor>, DoctorSqlRepository>();
             services.AddTransient<IRepository<Reviews>, ReviewsSqlRepository>();
@@ -94,23 +102,20 @@ namespace FinalWorkDentistry
 
             services.AddSignalR();
 
-           
-
-
             services.AddSmart();
 
             services.AddHttpContextAccessor();
-                services.AddScoped<HttpContextAccessor>();
-               // services.AddTransient<BlazorCart>();
-            }
+            services.AddScoped<HttpContextAccessor>();
+            // services.AddTransient<BlazorCart>();
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 
 
 
- 
 
-public void Configure(
+
+        public void Configure(
             IApplicationBuilder app,
             IWebHostEnvironment env,
             UserManager<ApplicationUser> userManager,
